@@ -40,6 +40,9 @@ db = SQLAlchemy(app)
 def running():
     return jsonify("Flask Server Running")
 
+@app.route('/register')
+def register():
+    return jsonify("register")
 
 
 app.run(debug=True)

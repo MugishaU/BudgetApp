@@ -3,6 +3,25 @@ import * as firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import "./styles/App.css";
 
+const login = () =>
+  firebase
+    .auth()
+    .signInWithEmailAndPassword("user1@user.com", "test123")
+    .catch(function (error) {
+      alert(error.message);
+    });
+const logout = () => firebase.app().auth().signOut();
+const token = () =>
+  firebase
+    .auth()
+    .currentUser.getIdToken(/* forceRefresh */ true)
+    .then(function (idToken) {
+      console.log(idToken);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
 export default function App() {
   const [user] = useAuthState(firebase.auth());
 
@@ -11,46 +30,15 @@ export default function App() {
       <>
         <h1>You're Logged In 🎉</h1>
         <h3>Email: {firebase.auth().currentUser.email}</h3>
-        <button
-          onClick={() => {
-            firebase.app().auth().signOut();
-          }}
-        >
-          Logout
-        </button>
-        <button
-          onClick={() => {
-            firebase
-              .auth()
-              .currentUser.getIdToken(/* forceRefresh */ true)
-              .then(function (idToken) {
-                console.log(idToken);
-              })
-              .catch(function (error) {
-                console.log(error);
-              });
-          }}
-        >
-          Get Token
-        </button>
+        <button onClick={logout}>Logout</button>
+        <button onClick={token}>Get Token</button>
       </>
     );
   }
   return (
     <>
       <h1>Sign In</h1>
-      <button
-        onClick={() => {
-          firebase
-            .auth()
-            .signInWithEmailAndPassword("user1@user.com", "test123")
-            .catch(function (error) {
-              alert(error.message);
-            });
-        }}
-      >
-        Login
-      </button>
+      <button onClick={login}>Login</button>
     </>
   );
 }
