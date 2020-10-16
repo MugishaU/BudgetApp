@@ -1,4 +1,3 @@
-# from functools import wraps
 import firebase_admin
 from firebase_admin import auth, credentials
 from os import environ

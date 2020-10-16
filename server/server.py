@@ -1,7 +1,5 @@
-import firebase_admin
 from os import environ
 from dotenv import load_dotenv
-from firebase_admin import auth, credentials
 from flask import Flask, jsonify, request, session
 from flask_cors import CORS
 from flask_session import Session
