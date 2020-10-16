@@ -48,7 +48,7 @@ def register():
             db.session.commit()
         except sqlalchemy.exc.SQLAlchemyError:
             return({'error':'Error Writing to Database'}),500 
-        return jsonify(response)
+        return jsonify(f"Welcome, {response[0]['username']}")
     return jsonify({'error':'No Token Provided'}),401
 
 app.run(debug=True)
