@@ -6,7 +6,7 @@ from flask import Flask, jsonify, request, session
 from flask_cors import CORS
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-# from helpers import format_resp
+from helpers import format_resp
 
 load_dotenv()
 
