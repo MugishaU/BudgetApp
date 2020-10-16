@@ -6,7 +6,7 @@ import "./styles/App.css";
 const login = () =>
   firebase
     .auth()
-    .signInWithEmailAndPassword("user1@user.com", "test123")
+    .signInWithEmailAndPassword("user4@user.com", "test123")
     .catch(function (error) {
       alert(error.message);
     });
