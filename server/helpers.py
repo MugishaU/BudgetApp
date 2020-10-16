@@ -35,5 +35,5 @@ def check_token(token):
         decoded_token = auth.verify_id_token(token)
         uid = decoded_token['uid']
     except (ValueError,firebase_admin.exceptions.FirebaseError):
-        return ({'error':True,'message':'Invalid Token'})
+        return ({'error':True,'message':'Invalid Token or Firebase Error'})
     return ({'error':False, 'uid':uid})
