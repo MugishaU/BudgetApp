@@ -28,15 +28,23 @@ def running():
 
 @app.route('/register', methods=["POST"])
 def register():
+    details = request.get_json()
     token = request.headers.get('token')
     if token:
         auth_token = check_token(token)
+
         if auth_token['error'] == True:
-            return jsonify({'error': auth_token['message']}),401
+            return jsonify({'error': auth_token['message']}), 401
+
+        if 'username' not in details or type(details['username']) != str:
+            return jsonify({'error':'Key \'username\' Not Present in Request Body or of Invalid Type (str expected)'}),403 
+        
         uid = auth_token['uid']
+
         try:
-            result_proxy = db.session.execute('INSERT INTO users (uid, username) VALUES (:1, :2) RETURNING username',{'1':uid, '2':12})
+            result_proxy = db.session.execute('INSERT INTO users (uid, username) VALUES (:1, :2) RETURNING username',{'1':uid, '2':details['username']})
             response = format_resp(result_proxy)
+            db.session.execute('INSERT INTO accounts (user_uid) VALUES (:1)',{'1':uid})
             db.session.commit()
         except sqlalchemy.exc.SQLAlchemyError:
             return({'error':'Error Writing to Database'}),500 
