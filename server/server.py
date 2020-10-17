@@ -39,7 +39,6 @@ def register():
         try:
             result_proxy = db.session.execute('INSERT INTO users (uid, username) VALUES (:1, :2) RETURNING username',{'1':uid, '2':details['username']})
             response = format_resp(result_proxy)
-            db.session.execute('INSERT INTO accounts (user_uid) VALUES (:1)',{'1':uid})
             db.session.commit()
         except sqlalchemy.exc.SQLAlchemyError:
             return({'error':'Error Writing to Database'}),500 
@@ -54,8 +53,12 @@ def user():
 
         if auth_token['error'] == True:
             return jsonify({'error': auth_token['message']}), 401
+
         uid = auth_token['uid']
-        return jsonify(uid)
+        
+        result_proxy = db.session.execute('SELECT username, budget FROM users WHERE uid = :1', {'1': uid})
+        response = format_resp(result_proxy)
+        return jsonify(response[0])
     return jsonify({'error':'No Token Provided'}),401
 
 
