@@ -17,51 +17,67 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = environ["DATABASE_URI"]
 db = SQLAlchemy(app)
 
+
 @app.route('/')
 def running():
     return jsonify("Flask Server Running")
 
+
 @app.route('/register', methods=["POST"])
 def register():
     details = request.get_json()
-    token = request.headers.get('token')
-    if token:
-        auth_token = check_token(token)
 
-        if auth_token['error'] == True:
-            return jsonify({'error': auth_token['message']}), 401
+    check = check_token()
 
-        if 'username' not in details or type(details['username']) != str:
-            return jsonify({'error':'Key \'username\' Not Present in Request Body or of Invalid Type (str expected)'}),403 
-        
-        uid = auth_token['uid']
+    if check['error'] == True:
+        return jsonify(check['message']), check['status']
 
-        try:
-            result_proxy = db.session.execute('INSERT INTO users (uid, username) VALUES (:1, :2) RETURNING username',{'1':uid, '2':details['username']})
-            response = format_resp(result_proxy)
-            db.session.commit()
-        except sqlalchemy.exc.SQLAlchemyError:
-            return({'error':'Error Writing to Database'}),500 
-        return jsonify(f"Welcome, {response[0]['username']}")
-    return jsonify({'error':'No Token Provided'}),401
+    if 'username' not in details or type(details['username']) != str:
+        return jsonify({'error': 'Key \'username\' Not Present in Request Body or of Invalid Type (str expected)'}), 403
+
+    uid = check['uid']
+
+    try:
+        result_proxy = db.session.execute('INSERT INTO users (uid, username) VALUES (:1, :2) RETURNING username', {
+                                          '1': uid, '2': details['username']})
+        response = format_resp(result_proxy)
+        db.session.commit()
+    except sqlalchemy.exc.SQLAlchemyError:
+        return jsonify({'error': 'Error Writing to Database'}), 500
+    return jsonify(f"Welcome, {response[0]['username']}")
+
 
 @app.route('/user', methods=["GET"])
 def user():
-    token = request.headers.get('token')
-    if token:
-        auth_token = check_token(token)
+    check = check_token()
+    if check['error'] == True:
+        return jsonify(check['message']), check['status']
 
-        if auth_token['error'] == True:
-            return jsonify({'error': auth_token['message']}), 401
+    uid = check['uid']
 
-        uid = auth_token['uid']
-        
-        result_proxy = db.session.execute('SELECT username, budget FROM users WHERE uid = :1', {'1': uid})
-        response = format_resp(result_proxy)
-        return jsonify(response[0])
-    return jsonify({'error':'No Token Provided'}),401
+    result_proxy = db.session.execute(
+        'SELECT username, budget FROM users WHERE uid = :1', {'1': uid})
+    response = format_resp(result_proxy)
+    return jsonify(response[0])
 
 
+@app.route('/history', methods=['GET'])
+def history():
+    status = 401
+    # token = request.headers.get('token')
+    # if token:
+    #     auth_token = check_token(token)
+
+    #     if auth_token['error'] == True:
+    #         return jsonify({'error': auth_token['message']}), 401
+
+    #     uid = auth_token['uid']
+    # return jsonify({'error': 'No Token Provided'}), 401
+    token = check_token()
+
+    if token['error'] == False:
+        return jsonify(token['uid'])
+    return jsonify(token['message']), token['status']
 
 
 app.run(debug=True)
