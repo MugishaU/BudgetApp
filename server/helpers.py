@@ -1,7 +1,7 @@
 import firebase_admin
 from firebase_admin import auth, credentials
 from os import environ
-from flask import request
+from flask import jsonify, request
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -15,11 +15,12 @@ GOOGLE_APPLICATION_CREDENTIALS = {
     "token_uri": environ["FIREBASE_TOKEN_URI"],
     "auth_provider_x509_cert_url": environ["AUTH_PROVIDER_X509_CERT_URL"],
     "client_x509_cert_url": environ["CLIENT_X509_CERT_URL"],
-    "private_key": environ["FIREBASE_PRIVATE_KEY"].replace("\\n", "\n").replace("\\","")
+    "private_key": environ["FIREBASE_PRIVATE_KEY"].replace("\\n", "\n").replace("\\", "")
 }
 
 cred = credentials.Certificate(GOOGLE_APPLICATION_CREDENTIALS)
 firebase_admin.initialize_app(cred)
+
 
 def format_resp(resultproxy):
     d, a = {}, []
@@ -29,10 +30,14 @@ def format_resp(resultproxy):
         a.append(d)
     return a
 
-def check_token(token):
-    try:
-        decoded_token = auth.verify_id_token(token)
-        uid = decoded_token['uid']
-    except (ValueError,firebase_admin.exceptions.FirebaseError):
-        return ({'error':True,'message':'Invalid Token or Firebase Error'})
-    return ({'error':False, 'uid':uid})
+
+def check_token():
+    token = request.headers.get('token')
+    if token:
+        try:
+            decoded_token = auth.verify_id_token(token)
+            uid = decoded_token['uid']
+        except (ValueError, firebase_admin.exceptions.FirebaseError):
+            return ({'error': True, 'message': {'error': 'Invalid Token or Firebase Error'}, 'status': 401})
+        return ({'error': False, 'uid': uid})
+    return ({'error': True, 'message': {'error': 'No Token Provided'}, 'status': 401})
