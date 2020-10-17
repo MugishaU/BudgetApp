@@ -13,9 +13,6 @@ app = Flask(__name__)
 CORS(app)
 Session(app)
 
-
-
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = environ["DATABASE_URI"]
 db = SQLAlchemy(app)
@@ -48,5 +45,20 @@ def register():
             return({'error':'Error Writing to Database'}),500 
         return jsonify(f"Welcome, {response[0]['username']}")
     return jsonify({'error':'No Token Provided'}),401
+
+@app.route('/user', methods=["GET"])
+def user():
+    token = request.headers.get('token')
+    if token:
+        auth_token = check_token(token)
+
+        if auth_token['error'] == True:
+            return jsonify({'error': auth_token['message']}), 401
+        uid = auth_token['uid']
+        return jsonify(uid)
+    return jsonify({'error':'No Token Provided'}),401
+
+
+
 
 app.run(debug=True)
