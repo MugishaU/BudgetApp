@@ -1,15 +1,9 @@
-DROP TABLE IF EXISTS accounts;
 DROP TABLE IF EXISTS history;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
     uid VARCHAR(28) PRIMARY KEY NOT NULL,
-    username VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE accounts (
-    id SERIAL PRIMARY KEY,
-    user_uid VARCHAR(28) references users(uid) NOT NULL,
+    username VARCHAR(20) NOT NULL,
     budget FLOAT 
 );
 
@@ -25,18 +19,11 @@ CREATE TABLE history (
     year INT NOT NULL
 );
 
-INSERT INTO users (uid, username)
+INSERT INTO users (uid, username, budget)
 VALUES
-('xmaODUiApRRoJMiFBqX7vHSdhyS2','user1'),
-('eUaufeImqfcuVnbDKz6gDFAnjfj1','user2'),
-('Ort6mJQIQiUushGJO4sKY9WNyGX2','user3')
-;
-
-INSERT INTO accounts (user_uid, budget)
-VALUES
-('xmaODUiApRRoJMiFBqX7vHSdhyS2',1000),
-('eUaufeImqfcuVnbDKz6gDFAnjfj1',1200),
-('Ort6mJQIQiUushGJO4sKY9WNyGX2',null)
+('xmaODUiApRRoJMiFBqX7vHSdhyS2','user1', 1000),
+('eUaufeImqfcuVnbDKz6gDFAnjfj1','user2', 1200),
+('Ort6mJQIQiUushGJO4sKY9WNyGX2','user3', null)
 ;
 
 INSERT INTO history (user_uid, budget, description, type, cost, day, month, year)
