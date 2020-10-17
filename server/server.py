@@ -5,6 +5,7 @@ from flask_cors import CORS
 from flask_session import Session
 from flask_sqlalchemy import sqlalchemy, SQLAlchemy
 from helpers import check_token, format_resp
+from datetime import datetime as dt
 
 load_dotenv()
 
@@ -25,15 +26,14 @@ def running():
 
 @app.route('/register', methods=["POST"])
 def register():
-    details = request.get_json()
 
     check = check_token()
-
     if check['error'] == True:
         return jsonify(check['message']), check['status']
 
+    details = request.get_json()
     if 'username' not in details or type(details['username']) != str:
-        return jsonify({'error': 'Key \'username\' Not Present in Request Body or of Invalid Type (str expected)'}), 403
+        return jsonify({'error': 'Key \'username\' Not Present in Request Body or of Invalid Type (str expected)'}), 400
 
     uid = check['uid']
 
@@ -49,6 +49,7 @@ def register():
 
 @app.route('/user', methods=["GET"])
 def user():
+
     check = check_token()
     if check['error'] == True:
         return jsonify(check['message']), check['status']
@@ -63,21 +64,30 @@ def user():
 
 @app.route('/history', methods=['GET'])
 def history():
-    status = 401
-    # token = request.headers.get('token')
-    # if token:
-    #     auth_token = check_token(token)
 
-    #     if auth_token['error'] == True:
-    #         return jsonify({'error': auth_token['message']}), 401
+    check = check_token()
+    if check['error'] == True:
+        return jsonify(check['message']), check['status']
 
-    #     uid = auth_token['uid']
-    # return jsonify({'error': 'No Token Provided'}), 401
-    token = check_token()
+    uid = check['uid']
 
-    if token['error'] == False:
-        return jsonify(token['uid'])
-    return jsonify(token['message']), token['status']
+    try:
+        month = int(request.args.get('month'))
+        year = int(request.args.get('year'))
+
+        if float(request.args.get('month')).is_integer() == False or float(request.args.get('year')).is_integer() == False:
+            raise ValueError
+
+        if month not in range(1, 13) or year not in range(2020, dt.now().year+1):
+            return jsonify({'error': 'Key(s) \'month\' or \'year\' Outside of Acceptable Range'}), 400
+
+    except (TypeError, ValueError):
+        return jsonify({'error': 'Key(s) \'month\' or \'year\' Not Present in Query String or of Invalid Type (int expected)'}), 400
+
+    result_proxy = db.session.execute(
+        'SELECT id, budget, description, type, cost, day FROM history WHERE user_uid = :1 AND month = :2 AND year = :3', {'1': uid, '2': month, '3': year})
+    resonse = format_resp(result_proxy)
+    return jsonify(resonse)
 
 
 app.run(debug=True)
