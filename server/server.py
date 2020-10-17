@@ -80,7 +80,6 @@ def history():
 
         if month not in range(1, 13) or year not in range(2020, dt.now().year+1):
             return jsonify({'error': 'Key(s) \'month\' or \'year\' Outside of Acceptable Range'}), 400
-
     except (TypeError, ValueError):
         return jsonify({'error': 'Key(s) \'month\' or \'year\' Not Present in Query String or of Invalid Type (int expected)'}), 400
 
