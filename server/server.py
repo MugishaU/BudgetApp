@@ -70,6 +70,7 @@ def history():
         return jsonify(check['message']), check['status']
 
     uid = check['uid']
+    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
     try:
         month = int(request.args.get('month'))
@@ -87,6 +88,40 @@ def history():
         'SELECT id, budget, description, type, cost, day FROM history WHERE user_uid = :1 AND month = :2 AND year = :3', {'1': uid, '2': month, '3': year})
     resonse = format_resp(result_proxy)
     return jsonify(resonse)
+
+
+@app.route('/budget', methods=['PUT'])
+def budget():
+
+    check = check_token()
+    if check['error'] == True:
+        return jsonify(check['message']), check['status']
+
+    details = request.get_json()
+
+    try:
+        budget = float(details['budget'])
+
+        if budget < 0:
+            raise ValueError
+
+    except (TypeError, ValueError, KeyError):
+        return jsonify({'error': 'Key \'budget\' Not Present in Request Body or of Invalid Type (float expected)'}), 400
+
+    uid = check['uid']
+    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
+
+    try:
+        result_proxy = db.session.execute(
+            'UPDATE users SET budget = :1 WHERE uid = :2 RETURNING budget', {'1': budget, '2': uid})
+        db.session.execute(
+            'UPDATE history SET budget = :1 WHERE user_uid = :2 AND month = :3 AND year = :4', {'1': budget, '2': uid, '3': dt.now().month, '4': dt.now().year})
+        response = format_resp(result_proxy)
+        db.session.commit()
+    except sqlalchemy.exc.SQLAlchemyError:
+        return jsonify({'error': 'Error Writing to Database'}), 500
+
+    return jsonify(f"Budget for {dt.now().month}/{dt.now().year} updated to £{format(budget,'.2f')}")
 
 
 app.run(debug=True)
