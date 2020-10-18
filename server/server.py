@@ -102,7 +102,7 @@ def budget():
     try:
         budget = float(details['budget'])
 
-        if budget < 0:
+        if budget <= 0:
             raise ValueError
 
     except (TypeError, ValueError, KeyError):
@@ -122,6 +122,37 @@ def budget():
         return jsonify({'error': 'Error Writing to Database'}), 500
 
     return jsonify(f"Budget for {dt.now().month}/{dt.now().year} updated to £{format(budget,'.2f')}")
+
+
+@app.route('/spend', methods=['POST'])
+def spend():
+
+    # check = check_token()
+    # if check['error'] == True:
+    #     return jsonify(check['message']), check['status']
+
+    details = request.get_json()
+
+    try:
+        budget = float(details['budget'])
+        description = details['description']
+        category = details['category']
+        cost = float(details['cost'])
+        day = int(details['day'])
+        month = int(details['month'])
+        year = int(details['year'])
+
+        if budget <= 0 or cost <= 0:
+            raise ValueError
+
+        if float(details['day']).is_integer() == False or float(details['month']).is_integer() == False or float(details['year']).is_integer() == False:
+            raise ValueError
+
+        if day not in range(1, 32) or month not in range(1, 13) or year > dt.now().year:
+            raise ValueError
+    except (TypeError, ValueError, KeyError):
+        return jsonify({'error': 'Requried Key(s) Missing in Request Body or of Invalid Type'}), 400
+    return jsonify("yay")
 
 
 app.run(debug=True)
