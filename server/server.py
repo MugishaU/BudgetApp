@@ -59,6 +59,9 @@ def user():
     result_proxy = db.session.execute(
         'SELECT username, budget FROM users WHERE uid = :1', {'1': uid})
     response = format_resp(result_proxy)
+
+    if len(response) == 0:
+        return jsonify({'error': 'User Not Found'}), 404
     return jsonify(response[0])
 
 
