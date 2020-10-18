@@ -28,10 +28,10 @@ VALUES
 
 INSERT INTO history (user_uid, budget, description, category, cost, day, month, year)
 VALUES
-('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'McDonalds', 'Food', 6.99, 10, 10, 2020),
+('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'McDonalds', 'Food', 6.50, 10, 10, 2020),
 ('eUaufeImqfcuVnbDKz6gDFAnjfj1', 1200, 'Spotify', 'Subscriptions', 9.99, 12, 10, 2020),
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'Petrol', 'Travel',15,10,10,2020),
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1500, 'Television', 'Misc', 300, 5, 9, 2020),
 ('eUaufeImqfcuVnbDKz6gDFAnjfj1', 1000, 'Tesco', 'Groceries', 23.46, 13, 9, 2020),
-('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'KFC', 'Food',15,10,10,2020),
+('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'KFC', 'Food',15,10,10,2020)
 ;
