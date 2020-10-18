@@ -260,4 +260,5 @@ def delete():
     return jsonify(f"{username} Permanently Deleted")
 
 
-app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True)
