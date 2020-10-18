@@ -73,7 +73,6 @@ def history():
         return jsonify(check['message']), check['status']
 
     uid = check['uid']
-    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
     try:
         month = int(request.args.get('month'))
@@ -116,7 +115,6 @@ def budget():
         return jsonify({'error': 'Key \'budget\' Not Present in Request Body or of Invalid Type (float expected)'}), 400
 
     uid = check['uid']
-    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
     try:
         result_proxy = db.session.execute(
@@ -166,7 +164,6 @@ def spend():
         return jsonify({'error': 'Requried Key(s) Missing in Request Body or of Invalid Type'}), 400
 
     uid = check['uid']
-    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
     try:
         result_proxy = db.session.execute(
@@ -186,7 +183,6 @@ def breakdown():
         return jsonify(check['message']), check['status']
 
     uid = check['uid']
-    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
     try:
         month = int(request.args.get('month'))
@@ -226,7 +222,6 @@ def reset():
         return jsonify(check['message']), check['status']
 
     uid = check['uid']
-    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
     try:
         db.session.execute(
@@ -249,7 +244,6 @@ def delete():
         return jsonify(check['message']), check['status']
 
     uid = check['uid']
-    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
     try:
         db.session.execute(
