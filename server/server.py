@@ -216,4 +216,27 @@ def breakdown():
     return jsonify(grouped_history)
 
 
+@app.route('/reset', methods=['DELETE'])
+def reset():
+    check = check_token()
+    if check['error'] == True:
+        return jsonify(check['message']), check['status']
+
+    uid = check['uid']
+    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
+
+    try:
+        db.session.execute(
+            'DELETE FROM history WHERE user_uid = :1', {'1': uid})
+        result_proxy = db.session.execute(
+            'UPDATE users SET budget = null WHERE uid = :1 RETURNING username', {
+                '1': uid}
+        )
+        db.session.commit()
+        response = format_resp(result_proxy)
+    except sqlalchemy.exc.SQLAlchemyError:
+        return jsonify({'error': 'Error Writing to Database'}), 500
+    return jsonify(f"{response[0]['username']} Account Succesfully Reset")
+
+
 app.run(debug=True)
