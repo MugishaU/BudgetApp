@@ -150,6 +150,10 @@ def spend():
 
         if day not in range(1, 32) or month not in range(1, 13) or year > dt.now().year:
             raise ValueError
+
+        if type(description) != str or type(category) != str:
+            raise TypeError
+
     except (TypeError, ValueError, KeyError):
         return jsonify({'error': 'Requried Key(s) Missing in Request Body or of Invalid Type'}), 400
     return jsonify("yay")
