@@ -150,13 +150,26 @@ def spend():
 
         if day not in range(1, 32) or month not in range(1, 13) or year > dt.now().year:
             raise ValueError
+        elif year == dt.now().year and month not in range(1, dt.now().month + 1):
+            raise ValueError
 
         if type(description) != str or type(category) != str:
             raise TypeError
-
     except (TypeError, ValueError, KeyError):
         return jsonify({'error': 'Requried Key(s) Missing in Request Body or of Invalid Type'}), 400
-    return jsonify("yay")
+
+    # uid = check['uid']
+    uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
+
+    try:
+        result_proxy = db.session.execute(
+            'INSERT INTO history (user_uid, budget, description, category, cost, day, month, year) VALUES (:1, :2, :3, :4, :5, :6, :7, :8) RETURNING description', {'1': uid, '2': budget, '3': description, '4': category, '5': cost, '6': day, '7': month, '8': year})
+        response = format_resp(result_proxy)
+        db.session.commit()
+    except sqlalchemy.exc.SQLAlchemyError:
+        return jsonify({'error': 'Error Writing to Database'}), 500
+
+    return jsonify(f"Expenditure '{response[0]['description']}' added to history")
 
 
 app.run(debug=True)
