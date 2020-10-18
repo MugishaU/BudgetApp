@@ -79,7 +79,7 @@ def history():
         if float(request.args.get('month')).is_integer() == False or float(request.args.get('year')).is_integer() == False:
             raise ValueError
 
-        if month not in range(1, 13) or year > dt.now().year or (year == dt.now().year and month not in range(1, dt.now().month+1)):
+        if month not in range(1, 13) or year not in range(1960, dt.now().year+1) or (year == dt.now().year and month not in range(1, dt.now().month+1)):
             return jsonify({'error': 'Key(s) \'month\' or \'year\' Outside of Acceptable Range'}), 400
 
     except (TypeError, ValueError):
@@ -87,11 +87,11 @@ def history():
 
     result_proxy = db.session.execute(
         'SELECT id, budget, description, category, cost, day FROM history WHERE user_uid = :1 AND month = :2 AND year = :3', {'1': uid, '2': month, '3': year})
-    resonse = format_resp(result_proxy)
+    response = format_resp(result_proxy)
 
-    if len(resonse) == 0:
+    if len(response) == 0:
         return jsonify({'error': f"No Entries Corresponding to Time Period {month}/{year}"}), 500
-    return jsonify(resonse)
+    return jsonify(response)
 
 
 @app.route('/budget', methods=['PUT'])
@@ -178,13 +178,12 @@ def spend():
 
 @app.route('/breakdown', methods=['GET'])
 def breakdown():
+    check = check_token()
+    if check['error'] == True:
+        return jsonify(check['message']), check['status']
 
-    # check = check_token()
-    # if check['error'] == True:
-    #     return jsonify(check['message']), check['status']
-
-    # uid = check['uid']
-    uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
+    uid = check['uid']
+    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
     try:
         month = int(request.args.get('month'))
@@ -193,12 +192,28 @@ def breakdown():
         if float(request.args.get('month')).is_integer() == False or float(request.args.get('year')).is_integer() == False:
             raise ValueError
 
-        if month not in range(1, 13) or year > dt.now().year or (year == dt.now().year and month not in range(1, dt.now().month + 1)):
+        if month not in range(1, 13) or year not in range(1960, dt.now().year+1) or (year == dt.now().year and month not in range(1, dt.now().month+1)):
             return jsonify({'error': 'Key(s) \'month\' or \'year\' Outside of Acceptable Range'}), 400
+
     except (TypeError, ValueError):
         return jsonify({'error': 'Key(s) \'month\' or \'year\' Not Present in Query String or of Invalid Type (int expected)'}), 400
 
-    return jsonify("yay")
+    result_proxy = db.session.execute(
+        'SELECT id, budget, description, category, cost, day FROM history WHERE user_uid = :1 AND month = :2 AND year = :3', {'1': uid, '2': month, '3': year})
+    response = format_resp(result_proxy)
+
+    if len(response) == 0:
+        return jsonify({'error': f"No Entries Corresponding to Time Period {month}/{year}"}), 500
+
+    grouped_history = {}
+
+    for entry in response:
+        if entry['category'] in grouped_history:
+            grouped_history[entry['category']] += entry['cost']
+        else:
+            grouped_history[entry['category']] = entry['cost']
+
+    return jsonify(grouped_history)
 
 
 app.run(debug=True)
