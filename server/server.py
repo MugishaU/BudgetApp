@@ -127,9 +127,9 @@ def budget():
 @app.route('/spend', methods=['POST'])
 def spend():
 
-    # check = check_token()
-    # if check['error'] == True:
-    #     return jsonify(check['message']), check['status']
+    check = check_token()
+    if check['error'] == True:
+        return jsonify(check['message']), check['status']
 
     details = request.get_json()
 
@@ -158,8 +158,8 @@ def spend():
     except (TypeError, ValueError, KeyError):
         return jsonify({'error': 'Requried Key(s) Missing in Request Body or of Invalid Type'}), 400
 
-    # uid = check['uid']
-    uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
+    uid = check['uid']
+    # uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
     try:
         result_proxy = db.session.execute(
