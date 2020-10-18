@@ -12,7 +12,7 @@ CREATE TABLE history (
     user_uid VARCHAR(28) references users(uid) NOT NULL,
     budget FLOAT NOT NULL,
     description VARCHAR(255) NOT NULL,
-    type VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
     cost FLOAT NOT NULL,
     day INT NOT NULL,
     month INT NOT NULL,
@@ -26,7 +26,7 @@ VALUES
 ('Ort6mJQIQiUushGJO4sKY9WNyGX2','user3', null)
 ;
 
-INSERT INTO history (user_uid, budget, description, type, cost, day, month, year)
+INSERT INTO history (user_uid, budget, description, category, cost, day, month, year)
 VALUES
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'McDonalds', 'Food', 6.99, 10, 10, 2020),
 ('eUaufeImqfcuVnbDKz6gDFAnjfj1', 1200, 'Spotify', 'Subscriptions', 9.99, 12, 10, 2020),
