@@ -176,22 +176,29 @@ def spend():
     return jsonify(f"Expenditure '{response[0]['description']}' added to history")
 
 
-# @app.route('/breakdown', methods=['GET'])
-# def breakdown():
+@app.route('/breakdown', methods=['GET'])
+def breakdown():
 
     # check = check_token()
     # if check['error'] == True:
     #     return jsonify(check['message']), check['status']
-    # try:
-    # month = int(request.args.get('month'))
-    # year = int(request.args.get('year'))
 
-    # if float(request.args.get('month')).is_integer() == False or float(request.args.get('year')).is_integer() == False:
-    #     raise ValueError
+    # uid = check['uid']
+    uid = 'xmaODUiApRRoJMiFBqX7vHSdhyS2'
 
-    # if month not in range(1, 13) or year not in range(2020, dt.now().year+1):
-    #     return jsonify({'error': 'Key(s) \'month\' or \'year\' Outside of Acceptable Range'}), 400
-    # except (TypeError, ValueError):
-    #     return jsonify({'error': 'Key(s) \'month\' or \'year\' Not Present in Query String or of Invalid Type (int expected)'}), 400
+    try:
+        month = int(request.args.get('month'))
+        year = int(request.args.get('year'))
+
+        if float(request.args.get('month')).is_integer() == False or float(request.args.get('year')).is_integer() == False:
+            raise ValueError
+
+        if month not in range(1, 13) or year > dt.now().year or (year == dt.now().year and month not in range(1, dt.now().month + 1)):
+            return jsonify({'error': 'Key(s) \'month\' or \'year\' Outside of Acceptable Range'}), 400
+    except (TypeError, ValueError):
+        return jsonify({'error': 'Key(s) \'month\' or \'year\' Not Present in Query String or of Invalid Type (int expected)'}), 400
+
+    return jsonify("yay")
+
 
 app.run(debug=True)
