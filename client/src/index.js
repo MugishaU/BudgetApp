@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 import * as firebase from "firebase";
 
 firebase.initializeApp({
@@ -13,4 +14,9 @@ firebase.initializeApp({
   appId: "1:319333016623:web:e9683f17506daa5c5ed2da",
 });
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
