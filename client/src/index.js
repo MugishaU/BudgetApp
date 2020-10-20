@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
+import UserContextProvider from "./Context/userContext ";
 import * as firebase from "firebase";
 
 firebase.initializeApp({
@@ -15,8 +16,10 @@ firebase.initializeApp({
 });
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
+  <UserContextProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </UserContextProvider>,
   document.getElementById("root")
 );
