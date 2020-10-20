@@ -32,6 +32,8 @@ export default function LoginForm() {
             setEmail(event.target.value);
           }}
         />
+        <br />
+        <br />
         <input
           required
           type="password"
@@ -42,6 +44,8 @@ export default function LoginForm() {
             setPassword(event.target.value);
           }}
         />
+        <br />
+        <br />
         <input type="submit" name="submit" value="Login" />
       </form>
       <p>
