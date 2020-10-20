@@ -49,7 +49,7 @@ export default function LoginForm() {
         <input type="submit" name="submit" value="Login" />
       </form>
       <p>
-        Don't already have an account? <Link to="/register">Register Here</Link>
+        Don't have an account? <Link to="/register">Register Here</Link>
       </p>
     </>
   );

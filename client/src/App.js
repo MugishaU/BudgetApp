@@ -1,8 +1,9 @@
 import React from "react";
 import * as firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { UnauthHomePage } from "./Containers/index/index";
+import { UnauthHomePage, AuthHomePage } from "./Containers/index/index";
 import "./styles/App.css";
+import { AuthNavbar } from "./Components/index";
 
 const login = () =>
   firebase
@@ -27,14 +28,7 @@ export default function App() {
   const [user] = useAuthState(firebase.auth());
 
   if (user) {
-    return (
-      <>
-        <h1>You're Logged In 🎉</h1>
-        <h3>Email: {firebase.auth().currentUser.email}</h3>
-        <button onClick={logout}>Logout</button>
-        <button onClick={token}>Get Token</button>
-      </>
-    );
+    return <AuthHomePage />;
   }
   return <UnauthHomePage />;
 }
