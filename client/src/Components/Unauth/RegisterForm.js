@@ -56,6 +56,7 @@ export default function RegisterForm() {
           name="username"
           placeholder="Preferred Name"
           value={username}
+          maxLength="20"
           onChange={(event) => {
             setUsername(event.target.value);
           }}
