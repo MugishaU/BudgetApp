@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import * as firebase from "firebase";
 
 const login = (email, password) => {};
@@ -51,6 +52,9 @@ export default function RegisterForm() {
         />
         <input type="submit" name="submit" value="Login" />
       </form>
+      <p>
+        Already have an account? <Link to="/">Login Here</Link>
+      </p>
     </>
   );
 }
