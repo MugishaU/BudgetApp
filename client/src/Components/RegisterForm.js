@@ -2,7 +2,22 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as firebase from "firebase";
 
-const login = (email, password) => {};
+const register = (email, password, password2) => {
+  if (password === password2) {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then((data) => alert(data.user.uid))
+      .then(() => {
+        alert("Created");
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  } else {
+    alert("Passwords Do Not Match!");
+  }
+};
 
 export default function RegisterForm() {
   const [email, setEmail] = useState("");
@@ -14,8 +29,9 @@ export default function RegisterForm() {
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          register(email, password);
+          register(email, password, password2);
           setPassword("");
+          setPassword2("");
         }}
       >
         <input
@@ -44,7 +60,7 @@ export default function RegisterForm() {
           type="password"
           name="password2"
           placeholder="Enter Password Again"
-          value={password}
+          value={password2}
           onChange={(event) => {
             setPassword2(event.target.value);
           }}
