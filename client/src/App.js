@@ -1,7 +1,7 @@
 import React from "react";
 import * as firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { UnauthNavbar, LoginForm } from "./Components/index/index";
+import { UnauthHomePage } from "./Containers/index/index";
 import "./styles/App.css";
 
 const login = () =>
@@ -36,12 +36,5 @@ export default function App() {
       </>
     );
   }
-  return (
-    <>
-      <UnauthNavbar />
-      <LoginForm />
-      {/* <h1>Sign In</h1> */}
-      {/* <button onClick={login}>Login</button> */}
-    </>
-  );
+  return <UnauthHomePage />;
 }
