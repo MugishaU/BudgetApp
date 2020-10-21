@@ -23,7 +23,6 @@ const registerFirebase = (username, email, password, password2) => {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then((data) => {
-        // alert(data.user.xa);
         registerDatabase(data.user.xa, username);
       })
       .catch((error) => {

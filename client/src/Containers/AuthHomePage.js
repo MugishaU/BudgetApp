@@ -8,7 +8,9 @@ const getToken = () => {
 };
 
 export default function AuthHomePage() {
-  const { profile, setProfile, setHistory, token } = useContext(UserContext);
+  const { authFetch, profile, setProfile, setHistory } = useContext(
+    UserContext
+  );
 
   useEffect(() => {
     let today = new Date();
@@ -16,30 +18,28 @@ export default function AuthHomePage() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        token: token,
       },
     };
-    if (token) {
-      fetch(`https://budgt-app.herokuapp.com/user`, options)
-        .then((result) => result.json())
-        .then((data) => {
-          setProfile(data);
-        })
-        .catch((error) => console.log(error));
 
-      fetch(
-        `https://budgt-app.herokuapp.com/history?month=${
-          today.getMonth() + 1
-        }&year=${today.getFullYear()}`,
-        options
-      )
-        .then((result) => result.json())
-        .then((data) => {
-          setHistory(data);
-        })
-        .catch((error) => console.log(error));
-    }
-  }, [token]);
+    authFetch(`https://budgt-app.herokuapp.com/user`, options)
+      .then((result) => result.json())
+      .then((data) => {
+        setProfile(data);
+      })
+      .catch((error) => console.log(error));
+
+    authFetch(
+      `https://budgt-app.herokuapp.com/history?month=${
+        today.getMonth() + 1
+      }&year=${today.getFullYear()}`,
+      options
+    )
+      .then((result) => result.json())
+      .then((data) => {
+        setHistory(data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
   return (
     <>
       <AuthNavbar />

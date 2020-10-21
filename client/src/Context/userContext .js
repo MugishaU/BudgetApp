@@ -8,28 +8,34 @@ const UserContextProvider = (props) => {
   const [user] = useAuthState(firebase.auth());
   const [profile, setProfile] = useState(null);
   const [history, setHistory] = useState([]);
-  const [token, setToken] = useState(null);
+
   useEffect(() => {
-    if (firebase.auth().currentUser !== null) {
-      firebase
-        .auth()
-        .currentUser.getIdToken(true)
-        .then(function (idToken) {
-          setToken(idToken);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else {
-      setToken(null);
+    if (firebase.auth().currentUser === null) {
       setProfile(null);
       setHistory([]);
     }
   }, [user]);
 
+  const authFetch = async (url, options) => {
+    if (firebase.auth().currentUser != null) {
+      const idToken = await firebase.auth().currentUser.getIdToken();
+      const authOptions = { ...options };
+      authOptions.headers.token = idToken;
+      return fetch(url, authOptions);
+    } else {
+      return fetch(url, options);
+    }
+  };
+
   return (
     <UserContext.Provider
-      value={{ profile, setProfile, history, setHistory, token }}
+      value={{
+        profile,
+        setProfile,
+        history,
+        setHistory,
+        authFetch,
+      }}
     >
       {props.children}
     </UserContext.Provider>
