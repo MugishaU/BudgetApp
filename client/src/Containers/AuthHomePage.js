@@ -11,10 +11,24 @@ export default function AuthHomePage() {
   const { authFetch, profile, setProfile, setHistory } = useContext(
     UserContext
   );
+  const month = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  let today = new Date();
 
   useEffect(() => {
     async function fetchData() {
-      let today = new Date();
       const options = {
         method: "GET",
         headers: {
@@ -52,7 +66,11 @@ export default function AuthHomePage() {
     <>
       <AuthNavbar />
       <h1>You're Logged In 🎉</h1>
-      {profile && <h1>{profile.username}</h1>}
+      {profile && (
+        <h1>
+          {profile.username}'s {month[today.getMonth()]} {today.getFullYear()}
+        </h1>
+      )}
       <h3>Email: {firebase.auth().currentUser.email}</h3>
       <button onClick={getToken}>Get Token</button>
     </>
