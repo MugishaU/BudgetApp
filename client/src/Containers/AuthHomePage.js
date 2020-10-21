@@ -13,32 +13,40 @@ export default function AuthHomePage() {
   );
 
   useEffect(() => {
-    let today = new Date();
-    const options = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    };
+    async function fetchData() {
+      let today = new Date();
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      try {
+        const profileFetch = authFetch(
+          `https://budgt-app.herokuapp.com/user`,
+          options
+        );
 
-    authFetch(`https://budgt-app.herokuapp.com/user`, options)
-      .then((result) => result.json())
-      .then((data) => {
-        setProfile(data);
-      })
-      .catch((error) => console.log(error));
+        const historyFetch = authFetch(
+          `https://budgt-app.herokuapp.com/history?month=${
+            today.getMonth() + 1
+          }&year=${today.getFullYear()}`,
+          options
+        );
 
-    authFetch(
-      `https://budgt-app.herokuapp.com/history?month=${
-        today.getMonth() + 1
-      }&year=${today.getFullYear()}`,
-      options
-    )
-      .then((result) => result.json())
-      .then((data) => {
-        setHistory(data);
-      })
-      .catch((error) => console.log(error));
+        const historyPromise = await historyFetch;
+        const profilePromise = await profileFetch;
+
+        const history = await historyPromise.json();
+        const profile = await profilePromise.json();
+
+        setProfile(profile);
+        setHistory(history);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
   }, []);
   return (
     <>
