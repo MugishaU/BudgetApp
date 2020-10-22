@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
+import { ProfileCard } from "../index/index";
 
 export default function Dashboard() {
   const { authFetch, setProfile, setHistory, setBreakdown } = useContext(
@@ -52,5 +53,9 @@ export default function Dashboard() {
     fetchData();
   }, []);
 
-  return <div></div>;
+  return (
+    <div>
+      <ProfileCard />
+    </div>
+  );
 }
