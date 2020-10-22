@@ -44,7 +44,7 @@ export default function AuthHomePage() {
         </h1>
       )}
       <Switch>
-        <Route path="/" component={Dashboard}></Route>
+        <Route exact path="/" component={Dashboard}></Route>
       </Switch>
     </>
   );
