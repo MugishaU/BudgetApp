@@ -1,16 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import * as firebase from "firebase";
-import { AuthNavbar } from "../Components/index/index";
+import { Switch, Route } from "react-router-dom";
+import { AuthNavbar, Dashboard } from "../Components/index/index";
 import { UserContext } from "../Context/userContext ";
 
-const getToken = () => {
-  console.log(firebase.auth().currentUser.getIdToken(true));
-};
-
 export default function AuthHomePage() {
-  const { authFetch, profile, setProfile, setHistory } = useContext(
-    UserContext
-  );
+  const { profile } = useContext(UserContext);
   const month = [
     "January",
     "February",
@@ -25,54 +20,33 @@ export default function AuthHomePage() {
     "November",
     "December",
   ];
+  const [greeting, setGreeting] = useState();
   let today = new Date();
-
+  let hour = today.getHours();
   useEffect(() => {
-    async function fetchData() {
-      const options = {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
-      try {
-        const profileFetch = authFetch(
-          `https://budgt-app.herokuapp.com/user`,
-          options
-        );
-
-        const historyFetch = authFetch(
-          `https://budgt-app.herokuapp.com/history?month=${
-            today.getMonth() + 1
-          }&year=${today.getFullYear()}`,
-          options
-        );
-
-        const historyPromise = await historyFetch;
-        const profilePromise = await profileFetch;
-
-        const history = await historyPromise.json();
-        const profile = await profilePromise.json();
-
-        setProfile(profile);
-        setHistory(history);
-      } catch (error) {
-        console.log(error);
-      }
+    if (hour >= 5 && hour < 12) {
+      setGreeting("Good Morning 🌅");
+    } else if (hour >= 12 && hour < 18) {
+      setGreeting("Good Afternoon ☀️");
+    } else if (hour >= 18 && hour < 21) {
+      setGreeting("Good Evening 🌇");
+    } else {
+      setGreeting("Hey There, It's Late 🌙");
     }
-    fetchData();
   }, []);
+
   return (
     <>
       <AuthNavbar />
-      <h1>You're Logged In 🎉</h1>
+      <h2>{greeting}</h2>
       {profile && (
         <h1>
           {profile.username}'s {month[today.getMonth()]} {today.getFullYear()}
         </h1>
       )}
-      <h3>Email: {firebase.auth().currentUser.email}</h3>
-      <button onClick={getToken}>Get Token</button>
+      <Switch>
+        <Route exact path="/" component={Dashboard}></Route>
+      </Switch>
     </>
   );
 }
