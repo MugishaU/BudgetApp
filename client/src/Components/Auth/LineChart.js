@@ -6,8 +6,9 @@ export default function LineChart() {
   const { history } = useContext(UserContext);
   useEffect(() => {
     if (history) {
+      let sortedHistory = history.sort((a, b) => a.day - b.day);
     }
-  });
+  }, [history]);
   return (
     <div>
       <Line
