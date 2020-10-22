@@ -5,7 +5,7 @@ export default function ProfileCard() {
   const { profile, history } = useContext(UserContext);
   const [total, setTotal] = useState(0);
   useEffect(() => {
-    if (history.length > 0) {
+    if (history) {
       let total = history.reduce((a, b) => {
         return a + b.cost;
       }, 0);

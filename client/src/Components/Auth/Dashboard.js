@@ -43,9 +43,17 @@ export default function Dashboard() {
         const history = await historyPromise.json();
         const profile = await profilePromise.json();
 
-        setProfile(profile);
-        setHistory(history);
-        setBreakdown(breakdown);
+        if (!("error" in profile)) {
+          setProfile(profile);
+        }
+
+        if (!("error" in history)) {
+          setHistory(history);
+        }
+
+        if (!("error" in breakdown)) {
+          setBreakdown(breakdown);
+        }
       } catch (error) {
         console.log(error);
       }

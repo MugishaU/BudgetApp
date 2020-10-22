@@ -13,7 +13,7 @@ const UserContextProvider = (props) => {
   useEffect(() => {
     if (firebase.auth().currentUser === null) {
       setProfile(null);
-      setHistory([]);
+      setHistory(null);
       setBreakdown(null);
     }
   }, [user]);

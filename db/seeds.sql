@@ -23,7 +23,8 @@ INSERT INTO users (uid, username, budget)
 VALUES
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2','user1', 1000),
 ('eUaufeImqfcuVnbDKz6gDFAnjfj1','user2', 1200),
-('Ort6mJQIQiUushGJO4sKY9WNyGX2','user3', null)
+('Ort6mJQIQiUushGJO4sKY9WNyGX2','user3', null),
+('Tkm9Gv4QzzL5MkQbExl1PiS7RuZ2','Mugisha',100)
 ;
 
 INSERT INTO history (user_uid, budget, description, category, cost, day, month, year)
@@ -33,5 +34,6 @@ VALUES
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'Petrol', 'Travel',15,10,10,2020),
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1500, 'Television', 'Misc', 300, 5, 9, 2020),
 ('eUaufeImqfcuVnbDKz6gDFAnjfj1', 1000, 'Tesco', 'Groceries', 23.46, 13, 9, 2020),
-('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'KFC', 'Food',15,10,10,2020)
+('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'KFC', 'Food',15,10,10,2020),
+('Tkm9Gv4QzzL5MkQbExl1PiS7RuZ2',200,'TV','Misc',200,22,10,2020)
 ;
