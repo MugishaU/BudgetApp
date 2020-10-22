@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import * as firebase from "firebase";
 import { UserContext } from "../../Context/userContext ";
 
 export default function Dashboard() {
-  const { authFetch, setProfile, setHistory } = useContext(UserContext);
+  const { authFetch, setProfile, setHistory, setBreakdown } = useContext(
+    UserContext
+  );
   let today = new Date();
   useEffect(() => {
     async function fetchData() {
@@ -14,11 +15,6 @@ export default function Dashboard() {
         },
       };
       try {
-        const profileFetch = authFetch(
-          `https://budgt-app.herokuapp.com/user`,
-          options
-        );
-
         const historyFetch = authFetch(
           `https://budgt-app.herokuapp.com/history?month=${
             today.getMonth() + 1
@@ -26,14 +22,29 @@ export default function Dashboard() {
           options
         );
 
+        const breakdownFetch = authFetch(
+          `https://budgt-app.herokuapp.com/breakdown?month=${
+            today.getMonth() + 1
+          }&year=${today.getFullYear()}`,
+          options
+        );
+
+        const profileFetch = authFetch(
+          `https://budgt-app.herokuapp.com/user`,
+          options
+        );
+
+        const breakdownPromise = await breakdownFetch;
         const historyPromise = await historyFetch;
         const profilePromise = await profileFetch;
 
+        const breakdown = await breakdownPromise.json();
         const history = await historyPromise.json();
         const profile = await profilePromise.json();
 
         setProfile(profile);
         setHistory(history);
+        setBreakdown(breakdown);
       } catch (error) {
         console.log(error);
       }

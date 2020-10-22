@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import * as firebase from "firebase";
 import { Switch, Route } from "react-router-dom";
 import { AuthNavbar, Dashboard } from "../Components/index/index";
 import { UserContext } from "../Context/userContext ";
