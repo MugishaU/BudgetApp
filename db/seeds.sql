@@ -33,6 +33,8 @@ VALUES
 ('eUaufeImqfcuVnbDKz6gDFAnjfj1', 1200, 'Spotify', 'Subscriptions', 9.99, 12, 10, 2020),
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'Petrol', 'Travel',15,15,10,2020),
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1500, 'Television', 'Misc', 300, 5, 9, 2020),
+('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'Television', 'Misc', 300, 5, 10, 2020),
+('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'Netflix', 'Subscriptions', 300, 5, 10, 2020),
 ('eUaufeImqfcuVnbDKz6gDFAnjfj1', 1000, 'Tesco', 'Groceries', 23.46, 13, 9, 2020),
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'KFC', 'Food',15,22,10,2020),
 ('Tkm9Gv4QzzL5MkQbExl1PiS7RuZ2',200,'TV','Misc',200,22,10,2020)
