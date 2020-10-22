@@ -3,3 +3,4 @@ export { default as LoginForm } from "../Unauth/LoginForm";
 export { default as RegisterForm } from "../Unauth/RegisterForm";
 
 export { default as AuthNavbar } from "../Auth/AuthNavbar";
+export { default as Dashboard } from "../Auth/Dashboard";
