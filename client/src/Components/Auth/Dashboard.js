@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
-import { ProfileCard } from "../index/index";
+import { ProfileCard, LineChart } from "../index/index";
 
 export default function Dashboard() {
   const { authFetch, setProfile, setHistory, setBreakdown } = useContext(
@@ -56,6 +56,7 @@ export default function Dashboard() {
   return (
     <div>
       <ProfileCard />
+      <LineChart />
     </div>
   );
 }
