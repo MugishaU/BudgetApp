@@ -49,12 +49,21 @@ export default function LineChart() {
   if (chartData) {
     return (
       <div>
+        <h3>Accumulated Spend</h3>
         <Line
+          options={{
+            scales: {
+              yAxes: [
+                { scaleLabel: { display: true, labelString: "Spend / £" } },
+              ],
+              xAxes: [{ scaleLabel: { display: true, labelString: "Day" } }],
+            },
+          }}
           data={{
             labels: chartData.dayLabel,
             datasets: [
               { label: "Spending", data: chartData.fullHistory },
-              { label: "Limit", data: chartData.budget },
+              { label: "Limit", data: chartData.budget, fill: false },
             ],
           }}
         />
