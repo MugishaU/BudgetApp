@@ -54,7 +54,12 @@ export default function LineChart() {
           options={{
             scales: {
               yAxes: [
-                { scaleLabel: { display: true, labelString: "Spend / £" } },
+                {
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Spend / £",
+                  },
+                },
               ],
               xAxes: [{ scaleLabel: { display: true, labelString: "Day" } }],
             },
@@ -62,8 +67,20 @@ export default function LineChart() {
           data={{
             labels: chartData.dayLabel,
             datasets: [
-              { label: "Spending", data: chartData.fullHistory },
-              { label: "Limit", data: chartData.budget, fill: false },
+              {
+                label: "Spending",
+                data: chartData.fullHistory,
+                tension: 0.1,
+                borderColor: "rgb(16,165,245)",
+                backgroundColor: "rgba(16,165,245,0.25)",
+              },
+              {
+                label: "Limit",
+                data: chartData.budget,
+                fill: false,
+                radius: 0,
+                borderColor: "red",
+              },
             ],
           }}
         />
