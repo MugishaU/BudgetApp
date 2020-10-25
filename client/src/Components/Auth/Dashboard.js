@@ -8,6 +8,7 @@ export default function Dashboard() {
     setProfile,
     setHistory,
     setBreakdown,
+    profile,
     history,
   } = useContext(UserContext);
   let today = new Date();
@@ -67,7 +68,7 @@ export default function Dashboard() {
 
   return (
     <div>
-      <ProfileCard />
+      <ProfileCard profile={profile} history={history} />
       <LineChart history={history} />
     </div>
   );

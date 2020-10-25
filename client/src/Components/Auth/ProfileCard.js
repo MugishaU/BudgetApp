@@ -1,8 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../Context/userContext ";
+import React, { useEffect, useState } from "react";
 
-export default function ProfileCard() {
-  const { profile, history } = useContext(UserContext);
+export default function ProfileCard(props) {
+  const { profile, history } = props;
   const [total, setTotal] = useState(0);
   useEffect(() => {
     if (history) {
