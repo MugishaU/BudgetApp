@@ -79,6 +79,7 @@ export default function LineChart(props) {
                 fill: false,
                 radius: 0,
                 borderColor: "red",
+                borderDash: [10, 5],
               },
             ],
           }}
