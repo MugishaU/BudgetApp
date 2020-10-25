@@ -32,7 +32,7 @@ export default function AddSpend() {
   return (
     <div>
       <h2>Add Expenditure</h2>
-      <form>
+      <form id="spend">
         <input
           required
           type="text"
@@ -44,6 +44,24 @@ export default function AddSpend() {
             setDescription(event.target.value);
           }}
         ></input>
+        <br />
+        <br />
+        <select
+          required
+          form="spend"
+          name="category"
+          onChange={(event) => {
+            setCategory(event.target.value);
+          }}
+        >
+          <option value={""}>Select a Category</option>
+          <option value={"Food"}>Food</option>
+          <option value={"Groceries"}>Groceries</option>
+          <option value={"Bills"}>Bills</option>
+          <option value={"Travel"}>Travel</option>
+          <option value={"Subscriptions"}>Subscriptions</option>
+          <option value={"Misc"}>Miscellaneous</option>
+        </select>
         <br />
         <br />
         <input
