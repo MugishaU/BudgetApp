@@ -21,14 +21,14 @@ export default function AddSpend() {
       month: dateArray[1],
       year: dateArray[0],
     };
-    console.log(body);
-    // const options = {
-    //   method: "POST",
-    //   body: JSON.stringify(body),
-    //   headers: { "Content-Type": "application/json" },
-    // };
 
-    // authFetch("https://budgt-app.herokuapp.com/spend", options);
+    const options = {
+      method: "POST",
+      body: JSON.stringify(body),
+      headers: { "Content-Type": "application/json" },
+    };
+
+    authFetch("https://budgt-app.herokuapp.com/spend", options);
   };
   if (profile) {
     return (
@@ -89,7 +89,7 @@ export default function AddSpend() {
           <input
             required
             type="date"
-            name="Date"
+            name="date"
             min={`${today.getFullYear()}-${today.getMonth() + 1}-01`}
             max={today.toISOString().slice(0, 10)}
             value={date}
