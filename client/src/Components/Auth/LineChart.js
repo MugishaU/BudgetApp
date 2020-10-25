@@ -1,14 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../../Context/userContext ";
+import React, { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
-export default function LineChart() {
-  const { history } = useContext(UserContext);
+export default function LineChart(props) {
   const [chartData, setChartData] = useState(null);
   useEffect(() => {
-    if (history) {
+    if (props.history) {
       const today = new Date();
-      const sortedHistory = history.sort((a, b) => a.day - b.day);
+      const sortedHistory = props.history.sort((a, b) => a.day - b.day);
       const distinctHistory = [];
       let position = 0;
 
@@ -30,7 +28,7 @@ export default function LineChart() {
       let dayLabel = [];
       let sortedHistoryPosition = 0;
       let accumulatedCost = 0;
-      let budgetCost = history[0].budget;
+      let budgetCost = props.history[0].budget;
 
       for (let day = 1; day <= lastDay; day++) {
         const checkDay = distinctHistory[sortedHistoryPosition];
@@ -46,7 +44,7 @@ export default function LineChart() {
       }
       setChartData({ fullHistory, budget, dayLabel });
     }
-  }, [history]);
+  }, [props.history]);
   if (chartData) {
     return (
       <div>

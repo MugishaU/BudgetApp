@@ -3,9 +3,13 @@ import { UserContext } from "../../Context/userContext ";
 import { ProfileCard, LineChart } from "../index/index";
 
 export default function Dashboard() {
-  const { authFetch, setProfile, setHistory, setBreakdown } = useContext(
-    UserContext
-  );
+  const {
+    authFetch,
+    setProfile,
+    setHistory,
+    setBreakdown,
+    history,
+  } = useContext(UserContext);
   let today = new Date();
   useEffect(() => {
     async function fetchData() {
@@ -64,7 +68,7 @@ export default function Dashboard() {
   return (
     <div>
       <ProfileCard />
-      <LineChart />
+      <LineChart history={history} />
     </div>
   );
 }
