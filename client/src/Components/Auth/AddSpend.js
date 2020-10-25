@@ -3,6 +3,11 @@ import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/userContext ";
 
 export default function AddSpend() {
+  const [description, setDescription] = useState(null);
+  const [category, setCategory] = useState(null);
+  const [cost, setCost] = useState(null);
+  const [date, setDate] = useState(null);
+
   const { authFetch, profile } = useContext(UserContext);
   const sendEntry = (description, category, cost, date) => {
     const dateArray = date.split("-");
@@ -26,7 +31,19 @@ export default function AddSpend() {
   return (
     <div>
       <h2>Add Expenditure</h2>
-      <form></form>
+      <form>
+        <input
+          required
+          type="text"
+          name="description"
+          placeholder="Short Description"
+          maxLength="255"
+          value={description}
+          onChange={(event) => {
+            setDescription(event.target.value);
+          }}
+        ></input>
+      </form>
       <Link to="/">Back to Dashboard</Link>
     </div>
   );
