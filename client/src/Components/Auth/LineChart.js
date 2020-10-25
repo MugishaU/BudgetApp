@@ -7,6 +7,7 @@ export default function LineChart() {
   const [chartData, setChartData] = useState(null);
   useEffect(() => {
     if (history) {
+      const today = new Date();
       const sortedHistory = history.sort((a, b) => a.day - b.day);
       const distinctHistory = [];
       let position = 0;
@@ -23,7 +24,7 @@ export default function LineChart() {
         }
       }
 
-      let lastDay = distinctHistory.slice(-1)[0].day;
+      let lastDay = today.getDate();
       let fullHistory = [];
       let budget = [];
       let dayLabel = [];
@@ -33,11 +34,11 @@ export default function LineChart() {
 
       for (let day = 1; day <= lastDay; day++) {
         const checkDay = distinctHistory[sortedHistoryPosition];
-        if (day < checkDay.day) {
-          // Do Nothing
-        } else if (day == checkDay.day) {
+        if (checkDay.day == day) {
           accumulatedCost += checkDay.cost;
-          sortedHistoryPosition++;
+          if (sortedHistoryPosition < distinctHistory.length - 1) {
+            sortedHistoryPosition++;
+          }
         }
         fullHistory.push(accumulatedCost);
         budget.push(budgetCost);
