@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
-import { ProfileCard, LineChart } from "../index/index";
+import { ProfileCard, LineChart, PieChart } from "../index/index";
 
 export default function Dashboard() {
   const {
@@ -10,6 +10,7 @@ export default function Dashboard() {
     setBreakdown,
     profile,
     history,
+    breakdown,
   } = useContext(UserContext);
   let today = new Date();
   useEffect(() => {
@@ -70,6 +71,7 @@ export default function Dashboard() {
     <div>
       <ProfileCard profile={profile} history={history} />
       <LineChart history={history} />
+      <PieChart breakdown={breakdown} />
     </div>
   );
 }

@@ -6,3 +6,4 @@ export { default as AuthNavbar } from "../Auth/AuthNavbar";
 export { default as Dashboard } from "../Auth/Dashboard";
 export { default as ProfileCard } from "../Auth/ProfileCard";
 export { default as LineChart } from "../Auth/LineChart";
+export { default as PieChart } from "../Auth/PieChart";
