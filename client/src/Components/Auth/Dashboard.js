@@ -1,4 +1,5 @@
 import React, { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/userContext ";
 import { ProfileCard, LineChart, PieChart } from "../index/index";
 
@@ -72,6 +73,7 @@ export default function Dashboard() {
       <ProfileCard profile={profile} history={history} />
       <LineChart history={history} />
       <PieChart breakdown={breakdown} />
+      <Link to="/spend">Add Expenditure</Link>
     </div>
   );
 }

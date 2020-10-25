@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import { AuthNavbar, Dashboard, AddEntry } from "../Components/index/index";
+import { AuthNavbar, Dashboard, AddSpend } from "../Components/index/index";
 import { UserContext } from "../Context/userContext ";
 
 export default function AuthHomePage() {
@@ -45,7 +45,7 @@ export default function AuthHomePage() {
       )}
       <Switch>
         <Route exact path="/" component={Dashboard} />
-        <Route path="/entry" component={AddEntry} />
+        <Route path="/spend" component={AddSpend} />
       </Switch>
     </>
   );
