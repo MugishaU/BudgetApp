@@ -1,8 +1,9 @@
 import React, { useState, useContext } from "react";
+import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/userContext ";
 
-export default function AddSpend() {
+export default withRouter(function AddSpend(props) {
   let today = new Date();
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
@@ -10,7 +11,7 @@ export default function AddSpend() {
   const [date, setDate] = useState(today.toISOString().slice(0, 10));
 
   const { authFetch, profile } = useContext(UserContext);
-  const sendEntry = (date, budget, description, category, cost) => {
+  const sendEntry = async (date, budget, description, category, cost) => {
     const dateArray = date.split("-");
     const body = {
       budget: budget,
@@ -28,7 +29,19 @@ export default function AddSpend() {
       headers: { "Content-Type": "application/json" },
     };
 
-    authFetch("https://budgt-app.herokuapp.com/spend", options);
+    const fetch = await authFetch(
+      "https://budgt-app.herokuapp.com/spend",
+      options
+    );
+    const fetchResult = await fetch.json();
+    const fetchError = fetchResult.error;
+
+    if (!fetchError) {
+      alert(fetchResult);
+      props.history.push("/");
+    } else {
+      alert(fetchError);
+    }
   };
   if (profile) {
     return (
@@ -107,4 +120,4 @@ export default function AddSpend() {
   } else {
     return null;
   }
-}
+});
