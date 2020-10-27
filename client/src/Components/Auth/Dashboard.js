@@ -5,16 +5,19 @@ import { ProfileCard, LineChart, PieChart } from "../index/index";
 
 export default function Dashboard() {
   const {
+    dashboard,
     authFetch,
     setProfile,
     setHistory,
     setBreakdown,
+    setDashboard,
     profile,
     history,
     breakdown,
   } = useContext(UserContext);
   let today = new Date();
   useEffect(() => {
+    setDashboard(!dashboard);
     async function fetchData() {
       const options = {
         method: "GET",
@@ -73,7 +76,7 @@ export default function Dashboard() {
       <Link to="/spend">Add Expenditure</Link>
       <ProfileCard profile={profile} history={history} />
       <LineChart history={history} />
-      <PieChart breakdown={breakdown} />  
+      <PieChart breakdown={breakdown} />
     </div>
   );
 }

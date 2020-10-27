@@ -9,6 +9,7 @@ const UserContextProvider = (props) => {
   const [profile, setProfile] = useState(null);
   const [history, setHistory] = useState([]);
   const [breakdown, setBreakdown] = useState(null);
+  const [dashboard, setDashboard] = useState(false);
 
   useEffect(() => {
     if (firebase.auth().currentUser === null) {
@@ -32,6 +33,8 @@ const UserContextProvider = (props) => {
   return (
     <UserContext.Provider
       value={{
+        dashboard,
+        setDashboard,
         profile,
         setProfile,
         history,
