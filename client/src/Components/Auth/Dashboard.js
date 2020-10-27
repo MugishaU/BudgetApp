@@ -70,10 +70,10 @@ export default function Dashboard() {
 
   return (
     <div>
+      <Link to="/spend">Add Expenditure</Link>
       <ProfileCard profile={profile} history={history} />
       <LineChart history={history} />
-      <PieChart breakdown={breakdown} />
-      <Link to="/spend">Add Expenditure</Link>
+      <PieChart breakdown={breakdown} />  
     </div>
   );
 }
