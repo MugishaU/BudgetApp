@@ -4,7 +4,14 @@ import { AuthNavbar, Dashboard, AddSpend } from "../Components/index/index";
 import { UserContext } from "../Context/userContext ";
 
 export default function AuthHomePage() {
-  const { profile } = useContext(UserContext);
+  const {
+    profile,
+    dashboard,
+    authFetch,
+    setProfile,
+    setHistory,
+    setBreakdown,
+  } = useContext(UserContext);
   const month = [
     "January",
     "February",
@@ -23,6 +30,57 @@ export default function AuthHomePage() {
   let today = new Date();
   let hour = today.getHours();
   useEffect(() => {
+    async function fetchData() {
+      const options = {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      try {
+        const historyFetch = authFetch(
+          `https://budgt-app.herokuapp.com/history?month=${
+            today.getMonth() + 1
+          }&year=${today.getFullYear()}`,
+          options
+        );
+
+        const breakdownFetch = authFetch(
+          `https://budgt-app.herokuapp.com/breakdown?month=${
+            today.getMonth() + 1
+          }&year=${today.getFullYear()}`,
+          options
+        );
+
+        const profileFetch = authFetch(
+          `https://budgt-app.herokuapp.com/user`,
+          options
+        );
+
+        const breakdownPromise = await breakdownFetch;
+        const historyPromise = await historyFetch;
+        const profilePromise = await profileFetch;
+
+        const breakdown = await breakdownPromise.json();
+        const history = await historyPromise.json();
+        const profile = await profilePromise.json();
+
+        if (!("error" in profile)) {
+          setProfile(profile);
+        }
+
+        if (!("error" in history)) {
+          setHistory(history);
+        }
+
+        if (!("error" in breakdown)) {
+          setBreakdown(breakdown);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchData();
     if (hour >= 5 && hour < 12) {
       setGreeting("Good Morning 🌅");
     } else if (hour >= 12 && hour < 18) {
@@ -32,7 +90,7 @@ export default function AuthHomePage() {
     } else {
       setGreeting("Hey There, It's Late 🌙");
     }
-  }, []);
+  }, [dashboard]);
 
   return (
     <>
