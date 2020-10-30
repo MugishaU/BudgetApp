@@ -8,3 +8,4 @@ export { default as ProfileCard } from "../Auth/ProfileCard";
 export { default as LineChart } from "../Auth/LineChart";
 export { default as PieChart } from "../Auth/PieChart";
 export { default as AddSpend } from "../Auth/AddSpend";
+export { default as SetLimit } from "../Auth/SetLimit";

@@ -1,6 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
-import { AuthNavbar, Dashboard, AddSpend } from "../Components/index/index";
+import {
+  AuthNavbar,
+  Dashboard,
+  AddSpend,
+  SetLimit,
+} from "../Components/index/index";
 import { UserContext } from "../Context/userContext ";
 
 export default function AuthHomePage() {
@@ -101,10 +106,13 @@ export default function AuthHomePage() {
           {profile.username}'s {month[today.getMonth()]} {today.getFullYear()}
         </h1>
       )}
-      <Switch>
-        <Route exact path="/" component={Dashboard} />
-        <Route path="/spend" component={AddSpend} />
-      </Switch>
+      {profile && profile.username && profile.budget && (
+        <Switch>
+          <Route exact path="/" component={Dashboard} />
+          <Route path="/spend" component={AddSpend} />
+        </Switch>
+      )}
+      {profile && profile.username && !profile.budget && <SetLimit />}
     </>
   );
 }
