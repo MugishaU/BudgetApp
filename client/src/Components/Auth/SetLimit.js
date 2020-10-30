@@ -3,7 +3,7 @@ import { withRouter } from "react-router";
 import { UserContext } from "../../Context/userContext ";
 
 export default withRouter(function SetLimit(props) {
-  const { authFetch } = useContext(UserContext);
+  const { authFetch, dashboard, setDashboard } = useContext(UserContext);
   const [budget, setBudget] = useState("");
   const handleSubmit = async (budget) => {
     const body = {
@@ -25,7 +25,7 @@ export default withRouter(function SetLimit(props) {
 
     if (!fetchError) {
       alert(fetchResult);
-      props.history.push("/");
+      setDashboard(!dashboard);
     } else {
       alert(fetchError);
     }

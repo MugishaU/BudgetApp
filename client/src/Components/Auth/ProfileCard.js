@@ -12,7 +12,7 @@ export default function ProfileCard(props) {
       setTotal(total);
     }
   }, [history]);
-  if (profile && history) {
+  if (profile) {
     return (
       <div>
         <h3>Overview</h3>
