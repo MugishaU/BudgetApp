@@ -38,6 +38,7 @@ export default withRouter(function AddSpend(props) {
 
     if (!fetchError) {
       alert(fetchResult);
+      props.history.push("/");
     } else {
       alert(fetchError);
     }
