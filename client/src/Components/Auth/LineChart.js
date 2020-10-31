@@ -5,7 +5,15 @@ export default function LineChart(props) {
   const [chartData, setChartData] = useState(null);
   useEffect(() => {
     if (props.history) {
-      const today = new Date();
+      let today;
+      if (props.date) {
+        let dateArray = props.date.split("-");
+
+        today = new Date(dateArray[0], dateArray[1], 0);
+      } else {
+        today = new Date();
+      }
+
       const sortedHistory = props.history.sort((a, b) => a.day - b.day);
       const distinctHistory = [];
       let position = 0;
