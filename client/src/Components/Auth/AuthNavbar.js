@@ -10,11 +10,9 @@ export default function AuthNavbar() {
   return (
     <nav>
       <NavLink to="/">Dashboard</NavLink>
-      <NavLink to="/">Profile</NavLink>
+      <NavLink to="/profile">Profile</NavLink>
       <NavLink to="/history">History</NavLink>
-      <NavLink to="/" onClick={logout}>
-        Logout
-      </NavLink>
+      <span onClick={logout}>Logout</span>
     </nav>
   );
 }
