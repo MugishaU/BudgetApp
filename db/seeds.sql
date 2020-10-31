@@ -24,7 +24,7 @@ VALUES
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2','user1', 1000),
 ('eUaufeImqfcuVnbDKz6gDFAnjfj1','user2', 1200),
 ('Ort6mJQIQiUushGJO4sKY9WNyGX2','user3', null),
-('Tkm9Gv4QzzL5MkQbExl1PiS7RuZ2','Mugisha',100)
+('dI5FJ6eF6ZQUJMgY1mF537mZVGD3','Mugisha',100)
 ;
 
 INSERT INTO history (user_uid, budget, description, category, cost, day, month, year)
@@ -37,7 +37,6 @@ VALUES
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'Netflix', 'Subscriptions', 300, 5, 10, 2020),
 ('eUaufeImqfcuVnbDKz6gDFAnjfj1', 1000, 'Tesco', 'Groceries', 23.46, 13, 9, 2020),
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'KFC', 'Food',15,22,10,2020),
-('Tkm9Gv4QzzL5MkQbExl1PiS7RuZ2',100,'TV','Misc',200,22,10,2020),
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'Pizza Express', 'Food',48.56,23,10,2020),
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2', 1000, 'EDF Energy', 'Bills',100,24,10,2020)
 ;
