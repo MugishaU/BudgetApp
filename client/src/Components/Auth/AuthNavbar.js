@@ -11,7 +11,7 @@ export default function AuthNavbar() {
     <nav>
       <NavLink to="/">Dashboard</NavLink>
       <NavLink to="/">Profile</NavLink>
-      <NavLink to="/">History</NavLink>
+      <NavLink to="/history">History</NavLink>
       <NavLink to="/" onClick={logout}>
         Logout
       </NavLink>
