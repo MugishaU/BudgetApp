@@ -26,6 +26,9 @@ export default withRouter(function SetLimit(props) {
     if (!fetchError) {
       alert(fetchResult);
       setDashboard(!dashboard);
+      if (props.location.pathname != "/") {
+        props.history.push("/");
+      }
     } else {
       alert(fetchError);
     }
