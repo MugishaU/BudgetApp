@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/userContext ";
-import { ProfileCard, LineChart, PieChart } from "../index/index";
+import { LineChart, PieChart } from "../index/index";
 
 export default function History() {
   let today = new Date();
@@ -44,10 +44,13 @@ export default function History() {
         setHistory(history);
       } else {
         alert(history.error);
+        setHistory(null);
       }
 
       if (!("error" in breakdown)) {
         setBreakdown(breakdown);
+      } else {
+        setBreakdown(null);
       }
     } catch (error) {
       console.log(error);
@@ -76,6 +79,8 @@ export default function History() {
         <br />
         <input type="submit" value="Submit" />
       </form>
+      {history && date && <LineChart history={history} date={date} />}
+      {breakdown && <PieChart breakdown={breakdown} />}
     </div>
   );
 }
