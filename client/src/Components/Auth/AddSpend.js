@@ -5,6 +5,11 @@ import { UserContext } from "../../Context/userContext ";
 
 export default withRouter(function AddSpend(props) {
   let today = new Date();
+  let month = today.getMonth() + 1;
+  if (month < 10) {
+    month = String(month);
+    month = "0" + month;
+  }
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("");
   const [cost, setCost] = useState("");
@@ -103,7 +108,7 @@ export default withRouter(function AddSpend(props) {
             required
             type="date"
             name="date"
-            min={`${today.getFullYear()}-${today.getMonth() + 1}-01`}
+            min={`${today.getFullYear()}-${month}-01`}
             max={today.toISOString().slice(0, 10)}
             value={date}
             onChange={(event) => {
