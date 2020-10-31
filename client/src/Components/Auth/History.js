@@ -12,10 +12,46 @@ export default function History() {
   }
   const { authFetch } = useContext(UserContext);
   const [date, setDate] = useState("");
-  const sendDate = (date) => {
+  const [history, setHistory] = useState(null);
+  const [breakdown, setBreakdown] = useState(null);
+  const sendDate = async (date) => {
     const dateArray = date.split("-");
-    console.log(dateArray[1]);
-    console.log(dateArray[0]);
+
+    const options = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const historyFetch = authFetch(
+        `https://budgt-app.herokuapp.com/history?month=${dateArray[1]}&year=${dateArray[0]}`,
+        options
+      );
+
+      const breakdownFetch = authFetch(
+        `https://budgt-app.herokuapp.com/breakdown?month=${dateArray[1]}&year=${dateArray[0]}`,
+        options
+      );
+
+      const breakdownPromise = await breakdownFetch;
+      const historyPromise = await historyFetch;
+
+      const breakdown = await breakdownPromise.json();
+      const history = await historyPromise.json();
+
+      if (!("error" in history)) {
+        setHistory(history);
+      } else {
+        alert(history.error);
+      }
+
+      if (!("error" in breakdown)) {
+        setBreakdown(breakdown);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div>
