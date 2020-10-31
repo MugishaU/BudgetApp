@@ -8,6 +8,7 @@ import {
   History,
   Profile,
 } from "../Components/index/index";
+import Error404 from "../Components/Error404";
 import { UserContext } from "../Context/userContext ";
 
 export default function AuthHomePage() {
@@ -114,9 +115,15 @@ export default function AuthHomePage() {
           <Route path="/history" component={History} />
           <Route path="/profile" component={Profile} />
           <Route path="/spend" component={AddSpend} />
+          <Route component={Error404} />
         </Switch>
       )}
-      {profile && profile.username && !profile.budget && <SetLimit />}
+      {profile && profile.username && !profile.budget && (
+        <Switch>
+          <Route exact path="/" component={SetLimit}></Route>
+          <Route component={Error404} />
+        </Switch>
+      )}
     </>
   );
 }

@@ -5,6 +5,7 @@ import {
   LoginForm,
   RegisterForm,
 } from "../Components/index/index";
+import Error404 from "../Components/Error404";
 
 export default function UnauthHomePage() {
   return (
@@ -14,6 +15,7 @@ export default function UnauthHomePage() {
       <Switch>
         <Route exact path="/" component={LoginForm} />
         <Route path="/register" component={RegisterForm} />
+        <Route component={Error404} />
       </Switch>
     </>
   );
