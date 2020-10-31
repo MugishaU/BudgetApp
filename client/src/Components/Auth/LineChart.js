@@ -8,7 +8,6 @@ export default function LineChart(props) {
       let today;
       if (props.date) {
         let dateArray = props.date.split("-");
-
         today = new Date(dateArray[0], dateArray[1], 0);
       } else {
         today = new Date();

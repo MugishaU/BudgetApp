@@ -6,6 +6,7 @@ import {
   AddSpend,
   SetLimit,
   History,
+  Profile,
 } from "../Components/index/index";
 import { UserContext } from "../Context/userContext ";
 
@@ -111,6 +112,7 @@ export default function AuthHomePage() {
         <Switch>
           <Route exact path="/" component={Dashboard} />
           <Route path="/history" component={History} />
+          <Route path="/profile" component={Profile} />
           <Route path="/spend" component={AddSpend} />
         </Switch>
       )}
