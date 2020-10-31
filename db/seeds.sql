@@ -22,9 +22,7 @@ CREATE TABLE history (
 INSERT INTO users (uid, username, budget)
 VALUES
 ('xmaODUiApRRoJMiFBqX7vHSdhyS2','user1', 1000),
-('eUaufeImqfcuVnbDKz6gDFAnjfj1','user2', 1200),
-('Ort6mJQIQiUushGJO4sKY9WNyGX2','user3', null),
-('dI5FJ6eF6ZQUJMgY1mF537mZVGD3','Mugisha',100)
+('eUaufeImqfcuVnbDKz6gDFAnjfj1','user2', 1200)
 ;
 
 INSERT INTO history (user_uid, budget, description, category, cost, day, month, year)
