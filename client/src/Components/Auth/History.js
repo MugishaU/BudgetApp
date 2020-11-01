@@ -1,5 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import { UserContext } from "../../Context/userContext ";
 import { LineChart, PieChart } from "../index/index";
 
