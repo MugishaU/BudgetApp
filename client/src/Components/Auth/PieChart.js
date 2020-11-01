@@ -11,15 +11,6 @@ export default function PieChart(props) {
     "#469B25",
     "#807982",
     "#27447D",
-    "#8C71D8",
-    "#BD5146",
-    "#557C24",
-    "#D6D7D3",
-    "#EE0997",
-    "#532742",
-    "#277D6F",
-    "#C4677C",
-    "#34C00D",
   ];
   useEffect(() => {
     if (breakdown) {
