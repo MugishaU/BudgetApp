@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
-import { Router, withRouter } from "react-router";
+import { withRouter } from "react-router";
 import * as firebase from "firebase";
 
 export default withRouter(function Profile(props) {
@@ -17,6 +17,25 @@ export default withRouter(function Profile(props) {
     };
     const fetch = await authFetch(
       "https://budgt-app.herokuapp.com/budget",
+      options
+    );
+    const fetchResult = await fetch.json();
+    const fetchError = fetchResult.error;
+
+    if (!fetchError) {
+      alert(fetchResult);
+      props.history.push("/");
+    } else {
+      alert(fetchError);
+    }
+  };
+  const resetProfile = async () => {
+    const options = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    const fetch = await authFetch(
+      "https://budgt-app.herokuapp.com/reset",
       options
     );
     const fetchResult = await fetch.json();
@@ -64,6 +83,21 @@ export default withRouter(function Profile(props) {
         </label>
         <input type="submit" value="Submit" />
       </form>
+      <br />
+      <button
+        onClick={(event) => {
+          if (
+            window.confirm(
+              "Are you sure you want to clear all profile history? This cannot be undone."
+            )
+          ) {
+            event.preventDefault();
+            resetProfile();
+          }
+        }}
+      >
+        Reset Profile
+      </button>
     </div>
   );
 });
