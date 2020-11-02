@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
+import { withRouter } from "react-router";
 import {
   AuthNavbar,
   Dashboard,
@@ -11,7 +12,7 @@ import {
 import Error404 from "../Components/Error404";
 import { UserContext } from "../Context/userContext ";
 
-export default function AuthHomePage() {
+export default withRouter(function AuthHomePage(props) {
   const {
     profile,
     dashboard,
@@ -38,6 +39,11 @@ export default function AuthHomePage() {
   let today = new Date();
   let hour = today.getHours();
   useEffect(() => {
+    //problem
+    if (props.location.pathname == "/register") {
+      props.history.push("/");
+    }
+    //Problem
     async function fetchData() {
       const options = {
         method: "GET",
@@ -132,4 +138,4 @@ export default function AuthHomePage() {
       )}
     </>
   );
-}
+});
