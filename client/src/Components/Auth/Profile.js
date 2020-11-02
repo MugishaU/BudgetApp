@@ -86,11 +86,7 @@ export default withRouter(function Profile(props) {
       <br />
       <button
         onClick={(event) => {
-          if (
-            window.confirm(
-              "Are you sure you want to clear all profile history? This cannot be undone."
-            )
-          ) {
+          if (window.confirm("Are you sure? Resetting cannot be undone.")) {
             event.preventDefault();
             profileAction("reset");
           }
@@ -100,15 +96,11 @@ export default withRouter(function Profile(props) {
       </button>
       <button
         onClick={(event) => {
-          if (
-            window.confirm(
-              "Are you sure you want to delete your Account? This cannot be undone."
-            )
-          ) {
+          if (window.confirm("Are you sure? Deleting cannot be undone.")) {
             event.preventDefault();
 
             let user = firebase.auth().currentUser;
-            let password = prompt("enter password");
+            let password = prompt("Re-enter Password");
             const credentials = firebase.auth.EmailAuthProvider.credential(
               user.email,
               password
@@ -120,7 +112,7 @@ export default withRouter(function Profile(props) {
                 profileAction("delete").then(() => user.delete());
               })
               .catch(function (error) {
-                alert("Password Incorrect");
+                alert(error);
               });
           }
         }}
