@@ -75,14 +75,20 @@ export default function AuthHomePage() {
 
         if (!("error" in profile)) {
           setProfile(profile);
+        } else {
+          setProfile(null);
         }
 
         if (!("error" in history)) {
           setHistory(history);
+        } else {
+          setHistory(null);
         }
 
         if (!("error" in breakdown)) {
           setBreakdown(breakdown);
+        } else {
+          setBreakdown(null);
         }
       } catch (error) {
         console.log(error);
