@@ -1,12 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { withRouter } from "react-router";
 import * as firebase from "firebase";
 
-const logout = () => {
-  firebase.app().auth().signOut();
-};
-
-export default function AuthNavbar() {
+export default withRouter(function AuthNavbar(props) {
+  const logout = () => {
+    firebase.app().auth().signOut();
+    props.history.push("/");
+  };
   return (
     <nav>
       <NavLink to="/">Dashboard</NavLink>
@@ -15,4 +16,4 @@ export default function AuthNavbar() {
       <span onClick={logout}>Logout</span>
     </nav>
   );
-}
+});
