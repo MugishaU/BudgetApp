@@ -29,13 +29,13 @@ export default withRouter(function Profile(props) {
       alert(fetchError);
     }
   };
-  const resetProfile = async () => {
+  const profileAction = async (action) => {
     const options = {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     };
     const fetch = await authFetch(
-      "https://budgt-app.herokuapp.com/reset",
+      `https://budgt-app.herokuapp.com/${action}`,
       options
     );
     const fetchResult = await fetch.json();
@@ -92,11 +92,40 @@ export default withRouter(function Profile(props) {
             )
           ) {
             event.preventDefault();
-            resetProfile();
+            profileAction("reset");
           }
         }}
       >
-        Reset Profile
+        Reset Account
+      </button>
+      <button
+        onClick={(event) => {
+          if (
+            window.confirm(
+              "Are you sure you want to delete your Account? This cannot be undone."
+            )
+          ) {
+            event.preventDefault();
+
+            let user = firebase.auth().currentUser;
+            let password = prompt("enter password");
+            const credentials = firebase.auth.EmailAuthProvider.credential(
+              user.email,
+              password
+            );
+
+            user
+              .reauthenticateWithCredential(credentials)
+              .then(function () {
+                profileAction("delete").then(() => user.delete());
+              })
+              .catch(function (error) {
+                alert("Password Incorrect");
+              });
+          }
+        }}
+      >
+        Delete Account
       </button>
     </div>
   );
