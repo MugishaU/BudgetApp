@@ -11,4 +11,11 @@
 
 .mainBody {
   width: 90vw;
+  height: 100vh;
+  min-height: 525px;
+}
+
+.formDiv {
+  width: 100%;
+  max-width: 750px;
 }

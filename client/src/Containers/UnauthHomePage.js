@@ -11,7 +11,7 @@ export default function UnauthHomePage() {
   return (
     <>
       <UnauthNavbar />
-      <div className="mainBody">
+      <div className="mainBody d-flex align-items-center">
         <Switch>
           <Route exact path="/" component={LoginForm} />
           <Route path="/register" component={RegisterForm} />
