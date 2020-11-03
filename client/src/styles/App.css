@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Graduate&family=Poppins:wght@500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Graduate&family=Kalam:wght@300&family=Poppins:wght@500&display=swap");
 * {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
@@ -11,6 +11,11 @@
 
 .navbar {
   font-size: x-large;
+}
+
+.tagline {
+  font-family: "Kalam", cursive;
+  margin: -10px;
 }
 
 .mainBody {

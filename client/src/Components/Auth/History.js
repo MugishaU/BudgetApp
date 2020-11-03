@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
 import { LineChart, PieChart } from "../index/index";
 
@@ -55,16 +55,17 @@ export default function History() {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (date) {
+      sendDate(date);
+    }
+  }, [date]);
   return (
     <div>
       <h2>View History</h2>
       <h3>Select Month</h3>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          sendDate(date);
-        }}
-      >
+      <form>
         <input
           required
           type="month"
@@ -74,9 +75,6 @@ export default function History() {
             setDate(event.target.value);
           }}
         ></input>
-        <br />
-        <br />
-        <input type="submit" value="Submit" />
       </form>
       {history && date && <LineChart history={history} date={date} />}
       {breakdown && <PieChart breakdown={breakdown} />}
