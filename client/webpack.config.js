@@ -40,6 +40,7 @@ module.exports = {
       template: "public/index.html",
       filename: "index.html",
       inject: "body",
+      favicon: "./src/assets/chart-pie-solid.svg",
     }),
   ],
 };
