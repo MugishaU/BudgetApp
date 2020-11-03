@@ -42,9 +42,12 @@ export default function RegisterForm() {
   const [password2, setPassword2] = useState("");
   return (
     <div className="formDiv">
-      <h1 className="display-2">
-        <u>Register</u>
+      <br />
+      <h1 className="display-1 text-center">
+        <u className="logo">BDGT</u>
       </h1>
+      <br />
+      <h1 className="display-3">Register</h1>
       <br />
       <Form
         onSubmit={(event) => {

@@ -12,7 +12,7 @@ export default withRouter(function AuthNavbar(props) {
   };
   return (
     <Navbar bg="light">
-      <Navbar.Text>BDGT</Navbar.Text>
+      <Navbar.Text className="logo">BDGT</Navbar.Text>
       <NavLink className="nav-link" to="/">
         Dashboard
       </NavLink>

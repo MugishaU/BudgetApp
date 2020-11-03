@@ -16,9 +16,12 @@ export default function LoginForm() {
   const [password, setPassword] = useState("");
   return (
     <div className="formDiv">
-      <h1 className="display-2">
-        <u>Login</u>
+      <br />
+      <h1 className="display-1 text-center">
+        <u className="logo">BDGT</u>
       </h1>
+      <br />
+      <h2 className="display-3">Login</h2>
       <br />
       <Form
         onSubmit={(event) => {
