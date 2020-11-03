@@ -2,6 +2,7 @@ import React from "react";
 import * as firebase from "firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { UnauthHomePage, AuthHomePage } from "./Containers/index/index";
+import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/App.css";
 
 export default function App() {
