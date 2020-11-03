@@ -43,10 +43,6 @@ export default function RegisterForm() {
   return (
     <div className="formDiv">
       <br />
-      <h1 className="display-1 text-center">
-        <u className="logo">BDGT</u>
-      </h1>
-      <br />
       <h1 className="display-3">Register</h1>
       <br />
       <Form
@@ -69,6 +65,7 @@ export default function RegisterForm() {
               setUsername(event.target.value);
             }}
           />
+          <Form.Text className="text-muted">Maximum 20 characters.</Form.Text>
         </Form.Group>
         <Form.Group>
           <Form.Control
@@ -94,6 +91,7 @@ export default function RegisterForm() {
             }}
             minLength="6"
           />
+          <Form.Text className="text-muted">Minimum 6 characters.</Form.Text>
         </Form.Group>
 
         <Form.Group>
