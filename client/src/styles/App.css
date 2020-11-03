@@ -8,3 +8,7 @@
 .navbar {
   font-size: x-large;
 }
+
+.mainBody {
+  width: 90vw;
+}
