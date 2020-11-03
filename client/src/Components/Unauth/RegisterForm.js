@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as firebase from "firebase";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const registerDatabase = (token, username) => {
   const body = { username: username };
@@ -39,9 +41,15 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   return (
-    <>
-      <h1>Register</h1>
-      <form
+    <div className="formDiv">
+      <br />
+      <h1 className="display-1 text-center">
+        <u className="logo">BDGT</u>
+      </h1>
+      <br />
+      <h1 className="display-3">Register</h1>
+      <br />
+      <Form
         onSubmit={(event) => {
           event.preventDefault();
           registerFirebase(username, email, password, password2);
@@ -49,62 +57,68 @@ export default function RegisterForm() {
           setPassword2("");
         }}
       >
-        <input
-          required
-          type="text"
-          name="username"
-          placeholder="Preferred Name"
-          value={username}
-          maxLength="20"
-          onChange={(event) => {
-            setUsername(event.target.value);
-          }}
-        />
+        <Form.Group>
+          <Form.Control
+            required
+            type="text"
+            name="username"
+            placeholder="Preferred Name"
+            value={username}
+            maxLength="20"
+            onChange={(event) => {
+              setUsername(event.target.value);
+            }}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Control
+            required
+            type="email"
+            name="email"
+            placeholder="E-mail"
+            value={email}
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
+          />
+        </Form.Group>
+        <Form.Group>
+          <Form.Control
+            required
+            type="password"
+            name="password"
+            placeholder="Choose Password"
+            value={password}
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+            minLength="6"
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Control
+            required
+            type="password"
+            name="password2"
+            placeholder="Re-enter Password"
+            value={password2}
+            onChange={(event) => {
+              setPassword2(event.target.value);
+            }}
+            minLength="6"
+          />
+        </Form.Group>
         <br />
-        <br />
-        <input
-          required
-          type="email"
-          name="email"
-          placeholder="E-mail"
-          value={email}
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-        />
-        <br />
-        <br />
-        <input
-          required
-          type="password"
-          name="password"
-          placeholder="Choose Password"
-          value={password}
-          onChange={(event) => {
-            setPassword(event.target.value);
-          }}
-          minLength="6"
-        />
-        <br />
-        <br />
-        <input
-          required
-          type="password"
-          name="password2"
-          placeholder="Re-enter Password"
-          value={password2}
-          onChange={(event) => {
-            setPassword2(event.target.value);
-          }}
-          minLength="6"
-        />
-        <br />
-        <br />
-        <input type="submit" name="submit" value="Register" />
-      </form>
+
+        <Button size="lg" type="submit">
+          Register
+        </Button>
+      </Form>
+      <br />
       <p>
         Already have an account? <Link to="/">Login Here</Link>
       </p>
-    </>
+    </div>
   );
 }

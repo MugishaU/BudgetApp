@@ -115,27 +115,29 @@ export default withRouter(function AuthHomePage(props) {
   return (
     <>
       <AuthNavbar />
-      <h2>{greeting}</h2>
-      {profile && (
-        <h1>
-          {profile.username}'s {month[today.getMonth()]} {today.getFullYear()}
-        </h1>
-      )}
-      {profile && profile.username && profile.budget && (
-        <Switch>
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/history" component={History} />
-          <Route path="/profile" component={Profile} />
-          <Route path="/spend" component={AddSpend} />
-          <Route component={Error404} />
-        </Switch>
-      )}
-      {profile && profile.username && !profile.budget && (
-        <Switch>
-          <Route exact path="/" component={SetLimit}></Route>
-          <Route component={Error404} />
-        </Switch>
-      )}
+      <div className="mainBody">
+        <h2>{greeting}</h2>
+        {profile && (
+          <h1>
+            {profile.username}'s {month[today.getMonth()]} {today.getFullYear()}
+          </h1>
+        )}
+        {profile && profile.username && profile.budget && (
+          <Switch className="mainBody">
+            <Route exact path="/" component={Dashboard} />
+            <Route path="/history" component={History} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/spend" component={AddSpend} />
+            <Route component={Error404} />
+          </Switch>
+        )}
+        {profile && profile.username && !profile.budget && (
+          <Switch className="mainBody">
+            <Route exact path="/" component={SetLimit}></Route>
+            <Route component={Error404} />
+          </Switch>
+        )}
+      </div>
     </>
   );
 });

@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { withRouter } from "react-router";
 import * as firebase from "firebase";
 import Navbar from "react-bootstrap/Navbar";
+import Button from "react-bootstrap/Button";
 
 export default withRouter(function AuthNavbar(props) {
   const logout = () => {
@@ -11,7 +12,7 @@ export default withRouter(function AuthNavbar(props) {
   };
   return (
     <Navbar bg="light">
-      <Navbar.Text>BDGT</Navbar.Text>
+      <Navbar.Text className="logo">BDGT</Navbar.Text>
       <NavLink className="nav-link" to="/">
         Dashboard
       </NavLink>
@@ -21,7 +22,9 @@ export default withRouter(function AuthNavbar(props) {
       <NavLink className="nav-link" to="/history">
         History
       </NavLink>
-      <span onClick={logout}>Logout</span>
+      <Button onClick={logout} variant="outline-secondary" size="l">
+        Logout
+      </Button>
     </Navbar>
   );
 });

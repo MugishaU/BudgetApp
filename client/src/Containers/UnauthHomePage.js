@@ -11,12 +11,13 @@ export default function UnauthHomePage() {
   return (
     <>
       <UnauthNavbar />
-
-      <Switch>
-        <Route exact path="/" component={LoginForm} />
-        <Route path="/register" component={RegisterForm} />
-        <Route component={Error404} />
-      </Switch>
+      <div className="mainBody d-flex align-items-center">
+        <Switch>
+          <Route exact path="/" component={LoginForm} />
+          <Route path="/register" component={RegisterForm} />
+          <Route component={Error404} />
+        </Switch>
+      </div>
     </>
   );
 }
