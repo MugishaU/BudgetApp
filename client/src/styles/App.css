@@ -21,7 +21,7 @@
   margin: -10px;
 }
 
-.mainBody {
+.UnauthMainBody {
   width: 90vw;
   height: 100vh;
   min-height: 625px;
@@ -31,4 +31,10 @@
   width: 100%;
   max-width: 750px;
   margin: auto;
+}
+
+.authMainBody {
+  width: 90vw;
+  /* height: 100vh; */
+  /* min-height: 625px; */
 }
