@@ -2,7 +2,6 @@
 * {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  margin: auto;
 }
 
 .logo {
@@ -11,6 +10,10 @@
 
 .navbar {
   font-size: x-large;
+}
+
+.nav-link {
+  margin: auto;
 }
 
 .tagline {
@@ -27,4 +30,5 @@
 .formDiv {
   width: 100%;
   max-width: 750px;
+  margin: auto;
 }
