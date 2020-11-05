@@ -4,7 +4,7 @@
   font-family: "Poppins", sans-serif;
 }
 
-.logo {
+.graduate {
   font-family: "Graduate", cursive;
 }
 
@@ -16,7 +16,7 @@
   margin: auto;
 }
 
-.tagline {
+.cursive {
   font-family: "Kalam", cursive;
   margin: -10px;
 }
@@ -35,6 +35,16 @@
 
 .authMainBody {
   width: 90vw;
-  /* height: 100vh; */
-  /* min-height: 625px; */
+  margin: auto;
+}
+
+.colDiv {
+  border: blue solid 1px;
+  width: 100%;
+  margin: auto;
+}
+
+/* For seeing component boundaries */
+.b {
+  border: red solid 1px;
 }
