@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../Context/userContext ";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export default withRouter(function AddSpend(props) {
   let today = new Date();
@@ -50,76 +52,106 @@ export default withRouter(function AddSpend(props) {
   };
   if (profile) {
     return (
-      <div>
+      <div className="formDiv">
         <h2>Add Expenditure</h2>
-        <form
-          id="spend"
+        <br />
+        <Form
           onSubmit={(event) => {
             event.preventDefault();
             sendEntry(date, profile.budget, description, category, cost);
           }}
         >
-          <input
-            required
-            type="text"
-            name="description"
-            placeholder="Short Description"
-            maxLength="255"
-            value={description}
-            onChange={(event) => {
-              setDescription(event.target.value);
-            }}
-          ></input>
-          <br />
-          <br />
-          <select
-            required
-            form="spend"
-            name="category"
-            onChange={(event) => {
-              setCategory(event.target.value);
-            }}
+          <Form.Group>
+            <Form.Control
+              required
+              style={{ color: "black" }}
+              size="lg"
+              type="text"
+              name="description"
+              placeholder="Short Description"
+              maxLength="255"
+              value={description}
+              onChange={(event) => {
+                setDescription(event.target.value);
+              }}
+            />
+            <Form.Text className="text-muted">
+              Maximum 255 characters.
+            </Form.Text>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Control
+              required
+              style={{ color: "black" }}
+              size="lg"
+              as="select"
+              name="category"
+              onChange={(event) => {
+                setCategory(event.target.value);
+              }}
+            >
+              <option value={""}>Select a Category</option>
+              <option value={"Food"}>Food</option>
+              <option value={"Groceries"}>Groceries</option>
+              <option value={"Bills"}>Bills</option>
+              <option value={"Travel"}>Travel</option>
+              <option value={"Subscriptions"}>Subscriptions</option>
+              <option value={"Misc"}>Miscellaneous</option>
+            </Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Control
+              required
+              style={{ color: "black" }}
+              size="lg"
+              type="number"
+              name="Cost"
+              placeholder="Cost"
+              min="0.01"
+              step="0.01"
+              value={cost}
+              onChange={(event) => {
+                setCost(event.target.value);
+              }}
+            />
+            <Form.Text className="text-muted">In GBP.</Form.Text>
+          </Form.Group>
+
+          <Form.Group>
+            <Form.Control
+              required
+              style={{ color: "black" }}
+              size="lg"
+              type="date"
+              name="date"
+              min={`${today.getFullYear()}-${month}-01`}
+              max={today.toISOString().slice(0, 10)}
+              value={date}
+              onChange={(event) => {
+                setDate(event.target.value);
+              }}
+            />
+            <Form.Text className="text-muted">
+              Manual Format: "YYYY-MM-DD".
+            </Form.Text>
+          </Form.Group>
+
+          <Button
+            style={{ marginRight: 10 }}
+            size="lg"
+            variant="outline-secondary"
+            to="/"
+            as={Link}
           >
-            <option value={""}>Select a Category</option>
-            <option value={"Food"}>Food</option>
-            <option value={"Groceries"}>Groceries</option>
-            <option value={"Bills"}>Bills</option>
-            <option value={"Travel"}>Travel</option>
-            <option value={"Subscriptions"}>Subscriptions</option>
-            <option value={"Misc"}>Miscellaneous</option>
-          </select>
-          <br />
-          <br />
-          <input
-            required
-            type="number"
-            name="Cost"
-            placeholder="Cost"
-            min="0.01"
-            step="0.01"
-            value={cost}
-            onChange={(event) => {
-              setCost(event.target.value);
-            }}
-          ></input>
-          <br />
-          <br />
-          <input
-            required
-            type="date"
-            name="date"
-            min={`${today.getFullYear()}-${month}-01`}
-            max={today.toISOString().slice(0, 10)}
-            value={date}
-            onChange={(event) => {
-              setDate(event.target.value);
-            }}
-          ></input>
-          <br />
-          <br />
-          <input type="submit" value="Submit" />
-        </form>
-        <Link to="/">Back to Dashboard</Link>
+            BACK
+          </Button>
+
+          <Button size="lg" variant="success" type="submit">
+            SUBMIT
+          </Button>
+        </Form>
       </div>
     );
   } else {
