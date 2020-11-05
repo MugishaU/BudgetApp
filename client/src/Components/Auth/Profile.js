@@ -2,6 +2,9 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
 import { withRouter } from "react-router";
 import * as firebase from "firebase";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Table from "react-bootstrap/Table";
 
 export default withRouter(function Profile(props) {
   const { profile, authFetch } = useContext(UserContext);
@@ -52,73 +55,118 @@ export default withRouter(function Profile(props) {
     setBudget(profile.budget);
   }, [profile]);
   return (
-    <div>
-      <h2>Profile</h2>
-      <h3>Username: {profile.username}</h3>
-      <h3>Email: {firebase.auth().currentUser.email}</h3>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          if (budget != profile.budget) {
-            sendBudget(budget);
-          } else {
-            alert("Budget Unchanged");
-          }
-        }}
-      >
-        <label>
-          Budget:{" "}
-          <input
-            required
-            type="number"
-            name="Budget"
-            placeholder="Budget"
-            min="0.01"
-            step="0.01"
-            value={budget}
-            onChange={(event) => {
-              setBudget(event.target.value);
-            }}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+    <div className="formDiv">
       <br />
-      <button
-        onClick={(event) => {
-          if (window.confirm("Are you sure? Resetting cannot be undone.")) {
-            event.preventDefault();
-            profileAction("reset");
-          }
-        }}
-      >
-        Reset Account
-      </button>
-      <button
-        onClick={(event) => {
-          if (window.confirm("Are you sure? Deleting cannot be undone.")) {
-            event.preventDefault();
+      <Table striped bordered>
+        <tbody style={{ fontSize: 25 }}>
+          <th colSpan="2" className="text-center graduate">
+            <h2 className="graduate">PROFILE</h2>
+          </th>
+          <tr>
+            <th>USERNAME</th>
+            <td>{profile.username}</td>
+          </tr>
+          <tr>
+            <th>EMAIL</th>
+            <td>{firebase.auth().currentUser.email}</td>
+          </tr>
+          <tr>
+            <th>BUDGET</th>
+            <td>
+              <Form
+                inline
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  if (budget != profile.budget) {
+                    sendBudget(budget);
+                  } else {
+                    alert("Budget Unchanged");
+                  }
+                }}
+              >
+                <Form.Group>
+                  <Form.Control
+                    size="lg"
+                    required
+                    style={{ color: "black", marginRight: 10 }}
+                    type="number"
+                    name="Budget"
+                    min="0.01"
+                    step="0.01"
+                    value={budget}
+                    onChange={(event) => {
+                      setBudget(event.target.value);
+                    }}
+                  />
+                </Form.Group>
 
-            let user = firebase.auth().currentUser;
-            let password = prompt("Re-enter Password");
-            const credentials = firebase.auth.EmailAuthProvider.credential(
-              user.email,
-              password
-            );
+                <Button size="lg" type="submit" variant="success">
+                  SUBMIT
+                </Button>
+              </Form>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
 
-            user
-              .reauthenticateWithCredential(credentials)
-              .then(function () {
-                profileAction("delete").then(() => user.delete());
-              })
-              .catch(function (error) {
-                alert(error);
-              });
-          }
-        }}
-      >
-        Delete Account
-      </button>
+      <Table striped bordered size="sm">
+        <tbody>
+          <th colSpan="2" className="text-center graduate">
+            <h2 className="graduate">ACCOUNT CONTROL</h2>
+          </th>
+          <tr>
+            <td className="text-center">
+              <Button
+                variant="outline-warning"
+                style={{ width: "75%" }}
+                size="lg"
+                onClick={(event) => {
+                  if (
+                    window.confirm("Are you sure? Resetting cannot be undone.")
+                  ) {
+                    event.preventDefault();
+                    profileAction("reset");
+                  }
+                }}
+              >
+                RESET
+              </Button>
+            </td>
+            <td className="text-center">
+              <Button
+                variant="outline-danger"
+                style={{ width: "75%" }}
+                size="lg"
+                onClick={(event) => {
+                  if (
+                    window.confirm("Are you sure? Deleting cannot be undone.")
+                  ) {
+                    event.preventDefault();
+
+                    let user = firebase.auth().currentUser;
+                    let password = prompt("Confirm Password");
+                    const credentials = firebase.auth.EmailAuthProvider.credential(
+                      user.email,
+                      password
+                    );
+
+                    user
+                      .reauthenticateWithCredential(credentials)
+                      .then(function () {
+                        profileAction("delete").then(() => user.delete());
+                      })
+                      .catch(function (error) {
+                        alert(error);
+                      });
+                  }
+                }}
+              >
+                DELETE
+              </Button>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
     </div>
   );
 });

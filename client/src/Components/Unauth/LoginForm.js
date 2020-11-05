@@ -19,7 +19,7 @@ export default function LoginForm() {
       <br />
       <br />
       <h1 className="display-1 text-center">
-        <u className="logo">BDGT</u>
+        <u className="graduate">BDGT</u>
       </h1>
       <h3 className="text-muted text-center cursive">Budgeting, Simplified.</h3>
       <br />
