@@ -22,7 +22,7 @@ export default function PieChart(props) {
   if (chartData) {
     return (
       <div>
-        <h3 className="text-center">Spending Breakdown</h3>
+        <h3 className="text-center graduate">Spending Breakdown</h3>
         <Doughnut
           options={{
             legend: { labels: { fontSize: 20, fontFamily: "Graduate" } },

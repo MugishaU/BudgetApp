@@ -55,7 +55,7 @@ export default function LineChart(props) {
   if (chartData) {
     return (
       <div>
-        <h3 className="text-center">Accumulated Spend</h3>
+        <h3 className="text-center graduate">Accumulated Spend</h3>
         <Line
           options={{
             scales: {
