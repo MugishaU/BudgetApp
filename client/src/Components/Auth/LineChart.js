@@ -64,11 +64,23 @@ export default function LineChart(props) {
                   scaleLabel: {
                     display: true,
                     labelString: "Spend / £",
+                    fontSize: 20,
+                    fontFamily: "Graduate",
                   },
                 },
               ],
-              xAxes: [{ scaleLabel: { display: true, labelString: "Day" } }],
+              xAxes: [
+                {
+                  scaleLabel: {
+                    display: true,
+                    labelString: "Day",
+                    fontSize: 20,
+                    fontFamily: "Graduate",
+                  },
+                },
+              ],
             },
+            legend: { labels: { fontSize: 20, fontFamily: "Graduate" } },
           }}
           data={{
             labels: chartData.dayLabel,
@@ -85,7 +97,7 @@ export default function LineChart(props) {
                 data: chartData.budget,
                 fill: false,
                 radius: 0,
-                borderColor: "red",
+                borderColor: "#ff5252",
                 borderDash: [10, 5],
               },
             ],
