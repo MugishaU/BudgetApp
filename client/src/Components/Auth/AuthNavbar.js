@@ -11,7 +11,7 @@ export default withRouter(function AuthNavbar(props) {
     props.history.push("/");
   };
   return (
-    <Navbar bg="light">
+    <Navbar bg="light" sticky="top">
       <Navbar.Text className="graduate">BDGT</Navbar.Text>
       <NavLink className="nav-link" to="/">
         Dashboard
