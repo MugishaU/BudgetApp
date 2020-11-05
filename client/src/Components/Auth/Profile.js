@@ -144,7 +144,7 @@ export default withRouter(function Profile(props) {
                     event.preventDefault();
 
                     let user = firebase.auth().currentUser;
-                    let password = prompt("Re-enter Password");
+                    let password = prompt("Confirm Password");
                     const credentials = firebase.auth.EmailAuthProvider.credential(
                       user.email,
                       password
