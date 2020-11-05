@@ -31,7 +31,7 @@ export default function Dashboard() {
                   SPENT MORE THIS MONTH?
                 </Card.Title>
                 <Button className="colDiv" size="lg" to="/spend" as={Link}>
-                  Add Expenditure
+                  ADD EXPENDITURE
                 </Button>
               </Card.Body>
             </Card>
