@@ -39,9 +39,9 @@
 }
 
 .colDiv {
-  border: blue solid 1px;
   width: 100%;
   margin: auto;
+  padding: 10px;
 }
 
 /* For seeing component boundaries */
