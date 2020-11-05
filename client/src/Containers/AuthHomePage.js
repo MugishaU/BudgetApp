@@ -115,15 +115,17 @@ export default withRouter(function AuthHomePage(props) {
   return (
     <>
       <AuthNavbar />
-      <div className="mainBody">
-        <h2>{greeting}</h2>
+      <div className="authMainBody">
+        <br></br>
+        {/* <h3 className="cursive">{greeting}</h3> */}
         {profile && (
-          <h1>
-            {profile.username}'s {month[today.getMonth()]} {today.getFullYear()}
+          <h1 className="text-center">
+            <span className="cursive">{greeting}</span> · {profile.username}'s{" "}
+            {month[today.getMonth()]} {today.getFullYear()}
           </h1>
         )}
         {profile && profile.username && profile.budget && (
-          <Switch className="mainBody">
+          <Switch>
             <Route exact path="/" component={Dashboard} />
             <Route path="/history" component={History} />
             <Route path="/profile" component={Profile} />
@@ -132,7 +134,7 @@ export default withRouter(function AuthHomePage(props) {
           </Switch>
         )}
         {profile && profile.username && !profile.budget && (
-          <Switch className="mainBody">
+          <Switch>
             <Route exact path="/" component={SetLimit}></Route>
             <Route component={Error404} />
           </Switch>

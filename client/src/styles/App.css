@@ -2,10 +2,9 @@
 * {
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-  margin: auto;
 }
 
-.logo {
+.graduate {
   font-family: "Graduate", cursive;
 }
 
@@ -13,12 +12,16 @@
   font-size: x-large;
 }
 
-.tagline {
+.nav-link {
+  margin: auto;
+}
+
+.cursive {
   font-family: "Kalam", cursive;
   margin: -10px;
 }
 
-.mainBody {
+.UnauthMainBody {
   width: 90vw;
   height: 100vh;
   min-height: 625px;
@@ -27,4 +30,21 @@
 .formDiv {
   width: 100%;
   max-width: 750px;
+  margin: auto;
+}
+
+.authMainBody {
+  width: 90vw;
+  margin: auto;
+}
+
+.colDiv {
+  width: 100%;
+  margin: auto;
+  padding: 10px;
+}
+
+/* For seeing component boundaries */
+.b {
+  border: red solid 1px;
 }

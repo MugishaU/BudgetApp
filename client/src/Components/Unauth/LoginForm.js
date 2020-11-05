@@ -21,7 +21,7 @@ export default function LoginForm() {
       <h1 className="display-1 text-center">
         <u className="logo">BDGT</u>
       </h1>
-      <h3 className="text-muted text-center tagline">Budgeting, Simplified.</h3>
+      <h3 className="text-muted text-center cursive">Budgeting, Simplified.</h3>
       <br />
       <h2 className="display-3">Login</h2>
       <br />

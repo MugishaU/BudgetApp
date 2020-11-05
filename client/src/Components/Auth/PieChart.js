@@ -5,12 +5,12 @@ export default function PieChart(props) {
   const { breakdown } = props;
   const [chartData, setChartData] = useState(null);
   const colours = [
-    "#FF6384",
-    "#36A2EB",
-    "#FFCE56",
-    "#469B25",
-    "#807982",
-    "#27447D",
+    "#d11141",
+    "#011f4b",
+    "#f37735",
+    "#00b159",
+    "#ffc425",
+    "#00aedb",
   ];
   useEffect(() => {
     if (breakdown) {
@@ -22,8 +22,14 @@ export default function PieChart(props) {
   if (chartData) {
     return (
       <div>
-        <h3>Spending Breakdown</h3>
+        <h3 className="text-center graduate">SPENDING BREAKDOWN</h3>
         <Doughnut
+          options={{
+            legend: {
+              position: "right",
+              labels: { fontSize: 20, fontFamily: "Graduate" },
+            },
+          }}
           data={{
             labels: chartData.labels,
             datasets: [
