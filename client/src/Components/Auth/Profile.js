@@ -3,7 +3,6 @@ import { UserContext } from "../../Context/userContext ";
 import { withRouter } from "react-router";
 import * as firebase from "firebase";
 import Button from "react-bootstrap/Button";
-import ButtonToolbar from "react-bootstrap/ButtonToolbar";
 import Form from "react-bootstrap/Form";
 import Table from "react-bootstrap/Table";
 
@@ -110,42 +109,64 @@ export default withRouter(function Profile(props) {
         </tbody>
       </Table>
 
-      <br />
-      <button
-        onClick={(event) => {
-          if (window.confirm("Are you sure? Resetting cannot be undone.")) {
-            event.preventDefault();
-            profileAction("reset");
-          }
-        }}
-      >
-        Reset Account
-      </button>
-      <button
-        onClick={(event) => {
-          if (window.confirm("Are you sure? Deleting cannot be undone.")) {
-            event.preventDefault();
+      <Table striped bordered size="sm">
+        <tbody>
+          <th colSpan="2" className="text-center graduate">
+            <h2 className="graduate">ACCOUNT CONTROL</h2>
+          </th>
+          <tr>
+            <td className="text-center">
+              <Button
+                variant="outline-warning"
+                style={{ width: "75%" }}
+                size="lg"
+                onClick={(event) => {
+                  if (
+                    window.confirm("Are you sure? Resetting cannot be undone.")
+                  ) {
+                    event.preventDefault();
+                    profileAction("reset");
+                  }
+                }}
+              >
+                RESET
+              </Button>
+            </td>
+            <td className="text-center">
+              <Button
+                variant="outline-danger"
+                style={{ width: "75%" }}
+                size="lg"
+                onClick={(event) => {
+                  if (
+                    window.confirm("Are you sure? Deleting cannot be undone.")
+                  ) {
+                    event.preventDefault();
 
-            let user = firebase.auth().currentUser;
-            let password = prompt("Re-enter Password");
-            const credentials = firebase.auth.EmailAuthProvider.credential(
-              user.email,
-              password
-            );
+                    let user = firebase.auth().currentUser;
+                    let password = prompt("Re-enter Password");
+                    const credentials = firebase.auth.EmailAuthProvider.credential(
+                      user.email,
+                      password
+                    );
 
-            user
-              .reauthenticateWithCredential(credentials)
-              .then(function () {
-                profileAction("delete").then(() => user.delete());
-              })
-              .catch(function (error) {
-                alert(error);
-              });
-          }
-        }}
-      >
-        Delete Account
-      </button>
+                    user
+                      .reauthenticateWithCredential(credentials)
+                      .then(function () {
+                        profileAction("delete").then(() => user.delete());
+                      })
+                      .catch(function (error) {
+                        alert(error);
+                      });
+                  }
+                }}
+              >
+                DELETE
+              </Button>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
     </div>
   );
 });
