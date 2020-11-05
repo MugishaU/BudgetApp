@@ -15,7 +15,7 @@ export default function ProfileCard(props) {
   if (profile) {
     return (
       <div>
-        <h3>Overview</h3>
+        <h3 className="text-center">Overview</h3>
         <table>
           <tbody>
             <tr>
