@@ -35,7 +35,7 @@ export default function ProfileCard(props) {
               <td
                 style={{ color: profile.budget - total > 0 ? "black" : "red" }}
               >
-                {profile.budget > total
+                {profile.budget >= total
                   ? `£${(profile.budget - total).toFixed(2)}`
                   : `-£${-(profile.budget - total).toFixed(2)}`}
               </td>
