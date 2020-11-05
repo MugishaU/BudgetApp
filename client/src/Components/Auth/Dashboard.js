@@ -21,7 +21,7 @@ export default function Dashboard() {
       <Container>
         <Row>
           <Col>
-            <Button to="/spend" as={Link}>
+            <Button size="lg" to="/spend" as={Link}>
               Add Expenditure
             </Button>
           </Col>
