@@ -2,6 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
 import { withRouter } from "react-router";
 import * as firebase from "firebase";
+import Button from "react-bootstrap/Button";
+import ButtonToolbar from "react-bootstrap/ButtonToolbar";
+import Form from "react-bootstrap/Form";
+import Table from "react-bootstrap/Table";
 
 export default withRouter(function Profile(props) {
   const { profile, authFetch } = useContext(UserContext);
@@ -52,37 +56,60 @@ export default withRouter(function Profile(props) {
     setBudget(profile.budget);
   }, [profile]);
   return (
-    <div>
-      <h2>Profile</h2>
-      <h3>Username: {profile.username}</h3>
-      <h3>Email: {firebase.auth().currentUser.email}</h3>
-      <form
-        onSubmit={(event) => {
-          event.preventDefault();
-          if (budget != profile.budget) {
-            sendBudget(budget);
-          } else {
-            alert("Budget Unchanged");
-          }
-        }}
-      >
-        <label>
-          Budget:{" "}
-          <input
-            required
-            type="number"
-            name="Budget"
-            placeholder="Budget"
-            min="0.01"
-            step="0.01"
-            value={budget}
-            onChange={(event) => {
-              setBudget(event.target.value);
-            }}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+    <div className="formDiv">
+      <br />
+      <Table striped bordered>
+        <tbody style={{ fontSize: 25 }}>
+          <th colSpan="2" className="text-center graduate">
+            <h2 className="graduate">PROFILE</h2>
+          </th>
+          <tr>
+            <th>USERNAME</th>
+            <td>{profile.username}</td>
+          </tr>
+          <tr>
+            <th>EMAIL</th>
+            <td>{firebase.auth().currentUser.email}</td>
+          </tr>
+          <tr>
+            <th>BUDGET</th>
+            <td>
+              <Form
+                inline
+                onSubmit={(event) => {
+                  event.preventDefault();
+                  if (budget != profile.budget) {
+                    sendBudget(budget);
+                  } else {
+                    alert("Budget Unchanged");
+                  }
+                }}
+              >
+                <Form.Group>
+                  <Form.Control
+                    size="lg"
+                    required
+                    style={{ color: "black", marginRight: 10 }}
+                    type="number"
+                    name="Budget"
+                    min="0.01"
+                    step="0.01"
+                    value={budget}
+                    onChange={(event) => {
+                      setBudget(event.target.value);
+                    }}
+                  />
+                </Form.Group>
+
+                <Button size="lg" type="submit" variant="success">
+                  SUBMIT
+                </Button>
+              </Form>
+            </td>
+          </tr>
+        </tbody>
+      </Table>
+
       <br />
       <button
         onClick={(event) => {

@@ -53,8 +53,8 @@ export default withRouter(function AddSpend(props) {
   if (profile) {
     return (
       <div className="formDiv">
-        <h2>Add Expenditure</h2>
         <br />
+        <h2 className="graduate">Add Expenditure</h2>
         <Form
           onSubmit={(event) => {
             event.preventDefault();
