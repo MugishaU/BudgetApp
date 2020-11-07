@@ -17,9 +17,11 @@ export default function ProfileCard(props) {
       <div>
         <Table striped bordered>
           <tbody style={{ fontSize: 25 }}>
-            <th colSpan="2" className="text-center graduate">
-              <h3 className="graduate">OVERVIEW</h3>
-            </th>
+            <tr>
+              <th colSpan="2" className="text-center graduate">
+                <h3 className="graduate">OVERVIEW</h3>
+              </th>
+            </tr>
 
             <tr>
               <th>LIMIT</th>

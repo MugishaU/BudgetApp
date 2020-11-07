@@ -59,9 +59,11 @@ export default withRouter(function Profile(props) {
       <br />
       <Table striped bordered>
         <tbody style={{ fontSize: 25 }}>
-          <th colSpan="2" className="text-center graduate">
-            <h2 className="graduate">PROFILE</h2>
-          </th>
+          <tr>
+            <th colSpan="2" className="text-center graduate">
+              <h2 className="graduate">PROFILE</h2>
+            </th>
+          </tr>
           <tr>
             <th>USERNAME</th>
             <td>{profile.username}</td>
@@ -111,9 +113,11 @@ export default withRouter(function Profile(props) {
 
       <Table striped bordered size="sm">
         <tbody>
-          <th colSpan="2" className="text-center graduate">
-            <h2 className="graduate">ACCOUNT CONTROL</h2>
-          </th>
+          <tr>
+            <th colSpan="2" className="text-center graduate">
+              <h2 className="graduate">ACCOUNT CONTROL</h2>
+            </th>
+          </tr>
           <tr>
             <td className="text-center">
               <Button

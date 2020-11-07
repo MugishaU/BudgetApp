@@ -40,7 +40,7 @@ export default function Dashboard() {
 
         <Row>
           <Col className="colDiv">
-            <Card className="rounded">
+            <Card>
               <Card.Body>
                 <LineChart history={history} />
               </Card.Body>
