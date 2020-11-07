@@ -24,7 +24,7 @@ export default function ProfileCard(props) {
             </tr>
 
             <tr>
-              <th>LIMIT</th>
+              <th>BUDGET</th>
               <td>£{profile.budget.toFixed(2)}</td>
             </tr>
             <tr>
