@@ -1,6 +1,8 @@
 import React, { useState, useContext } from "react";
 import { withRouter } from "react-router";
 import { UserContext } from "../../Context/userContext ";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 export default withRouter(function SetLimit(props) {
   const { authFetch, dashboard, setDashboard } = useContext(UserContext);
@@ -34,32 +36,39 @@ export default withRouter(function SetLimit(props) {
     }
   };
   return (
-    <div>
-      <h1>Welcome!</h1>
-      <h2>Set Your Monthly Budget!</h2>
-      <h4>(Don't worry you can change it later)</h4>
-      <form
+    <div className="formDiv">
+      <br />
+      <h1 className="graduate">Welcome!</h1>
+      <h2 className="graduate">Set Your Monthly Budget</h2>
+      <h5 className="text-muted">(Don't worry you can change it later)</h5>
+      <br />
+      <Form
         onSubmit={(event) => {
           event.preventDefault();
           handleSubmit(budget);
         }}
       >
-        <input
-          required
-          type="number"
-          name="Cost"
-          placeholder="Budget"
-          min="0.01"
-          step="0.01"
-          value={budget}
-          onChange={(event) => {
-            setBudget(event.target.value);
-          }}
-        ></input>
-        <br />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
+        <Form.Group>
+          <Form.Control
+            required
+            size="lg"
+            style={{ color: "black" }}
+            type="number"
+            name="Cost"
+            placeholder="Budget"
+            min="0.01"
+            step="0.01"
+            value={budget}
+            onChange={(event) => {
+              setBudget(event.target.value);
+            }}
+          />
+          <Form.Text className="text-muted">In GBP.</Form.Text>
+        </Form.Group>
+        <Button size="lg" variant="success" type="submit">
+          SUBMIT
+        </Button>
+      </Form>
     </div>
   );
 });

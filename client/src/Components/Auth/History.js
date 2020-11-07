@@ -75,6 +75,7 @@ export default function History() {
           <Form.Group>
             <Form.Control
               required
+              size="lg"
               type="month"
               max={`${today.getFullYear()}-${month}`}
               value={date}
