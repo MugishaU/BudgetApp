@@ -30,7 +30,11 @@ export default function ProfileCard(props) {
               <td>£{total.toFixed(2)}</td>
             </tr>
             <tr>
-              <th>REMAINING</th>
+              <th
+                style={{ color: profile.budget - total > 0 ? "black" : "red" }}
+              >
+                {profile.budget - total > 0 ? "REMAINING" : "OVERBUDGET"}
+              </th>
               <td
                 style={{ color: profile.budget - total > 0 ? "black" : "red" }}
               >
