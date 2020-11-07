@@ -2,7 +2,10 @@ import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
 import { LineChart, PieChart } from "../index/index";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 export default function History() {
   let today = new Date();
@@ -67,7 +70,7 @@ export default function History() {
     <div>
       <div className="formDiv">
         <h2 className="graduate">History</h2>
-        <h3>Month</h3>
+        <h3>Select Month</h3>
         <Form>
           <Form.Group>
             <Form.Control
@@ -85,8 +88,24 @@ export default function History() {
           </Form.Group>
         </Form>
       </div>
-      {history && date && <LineChart history={history} date={date} />}
-      {breakdown && <PieChart breakdown={breakdown} />}
+      <Container>
+        <Row>
+          <Col className="colDiv">
+            <Card>
+              <Card.Body>
+                {history && date && <LineChart history={history} date={date} />}
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col className="colDiv">
+            <Card>
+              <Card.Body>
+                {breakdown && <PieChart breakdown={breakdown} />}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
