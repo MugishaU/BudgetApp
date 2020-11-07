@@ -51,7 +51,7 @@ export default function LineChart(props) {
       }
       setChartData({ fullHistory, budget, dayLabel });
     }
-  }, [props.history]);
+  }, [props.history, props.date]);
   if (chartData) {
     return (
       <div>
