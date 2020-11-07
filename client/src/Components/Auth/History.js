@@ -1,6 +1,8 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
 import { LineChart, PieChart } from "../index/index";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 export default function History() {
   let today = new Date();
@@ -63,19 +65,26 @@ export default function History() {
   }, [date]);
   return (
     <div>
-      <h2>View History</h2>
-      <h3>Select Month</h3>
-      <form>
-        <input
-          required
-          type="month"
-          max={`${today.getFullYear()}-${month}`}
-          value={date}
-          onChange={(event) => {
-            setDate(event.target.value);
-          }}
-        ></input>
-      </form>
+      <div className="formDiv">
+        <h2 className="graduate">History</h2>
+        <h3>Month</h3>
+        <Form>
+          <Form.Group>
+            <Form.Control
+              required
+              type="month"
+              max={`${today.getFullYear()}-${month}`}
+              value={date}
+              onChange={(event) => {
+                setDate(event.target.value);
+              }}
+            ></Form.Control>
+            <Form.Text className="text-muted">
+              Manual Format: YYYY-MM.
+            </Form.Text>
+          </Form.Group>
+        </Form>
+      </div>
       {history && date && <LineChart history={history} date={date} />}
       {breakdown && <PieChart breakdown={breakdown} />}
     </div>
