@@ -1,6 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
 import { LineChart, PieChart } from "../index/index";
+import Form from "react-bootstrap/Form";
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Card from "react-bootstrap/Card";
 
 export default function History() {
   let today = new Date();
@@ -63,21 +68,45 @@ export default function History() {
   }, [date]);
   return (
     <div>
-      <h2>View History</h2>
-      <h3>Select Month</h3>
-      <form>
-        <input
-          required
-          type="month"
-          max={`${today.getFullYear()}-${month}`}
-          value={date}
-          onChange={(event) => {
-            setDate(event.target.value);
-          }}
-        ></input>
-      </form>
-      {history && date && <LineChart history={history} date={date} />}
-      {breakdown && <PieChart breakdown={breakdown} />}
+      <div className="formDiv">
+        <h2 className="graduate">History</h2>
+        <h3>Select Month</h3>
+        <Form>
+          <Form.Group>
+            <Form.Control
+              required
+              size="lg"
+              type="month"
+              max={`${today.getFullYear()}-${month}`}
+              value={date}
+              onChange={(event) => {
+                setDate(event.target.value);
+              }}
+            ></Form.Control>
+            <Form.Text className="text-muted">
+              Manual Format: YYYY-MM.
+            </Form.Text>
+          </Form.Group>
+        </Form>
+      </div>
+      <Container>
+        <Row>
+          <Col className="colDiv">
+            <Card>
+              <Card.Body>
+                {history && date && <LineChart history={history} date={date} />}
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col className="colDiv">
+            <Card>
+              <Card.Body>
+                {breakdown && <PieChart breakdown={breakdown} />}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }

@@ -17,12 +17,14 @@ export default function ProfileCard(props) {
       <div>
         <Table striped bordered>
           <tbody style={{ fontSize: 25 }}>
-            <th colSpan="2" className="text-center graduate">
-              <h3 className="graduate">OVERVIEW</h3>
-            </th>
+            <tr>
+              <th colSpan="2" className="text-center graduate">
+                <h3 className="graduate">OVERVIEW</h3>
+              </th>
+            </tr>
 
             <tr>
-              <th>LIMIT</th>
+              <th>BUDGET</th>
               <td>£{profile.budget.toFixed(2)}</td>
             </tr>
             <tr>
@@ -30,13 +32,17 @@ export default function ProfileCard(props) {
               <td>£{total.toFixed(2)}</td>
             </tr>
             <tr>
-              <th>REMAINING</th>
+              <th
+                style={{ color: profile.budget - total > 0 ? "black" : "red" }}
+              >
+                {profile.budget - total >= 0 ? "REMAINING" : "OVERBUDGET"}
+              </th>
               <td
                 style={{ color: profile.budget - total > 0 ? "black" : "red" }}
               >
                 {profile.budget >= total
                   ? `£${(profile.budget - total).toFixed(2)}`
-                  : `-£${-(profile.budget - total).toFixed(2)}`}
+                  : `-£${Math.abs(profile.budget - total).toFixed(2)}`}
               </td>
             </tr>
           </tbody>
