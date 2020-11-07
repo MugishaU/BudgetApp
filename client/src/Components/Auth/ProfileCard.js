@@ -36,7 +36,7 @@ export default function ProfileCard(props) {
               >
                 {profile.budget >= total
                   ? `£${(profile.budget - total).toFixed(2)}`
-                  : `-£${-(profile.budget - total).toFixed(2)}`}
+                  : `-£${Math.abs(profile.budget - total).toFixed(2)}`}
               </td>
             </tr>
           </tbody>
