@@ -15,6 +15,8 @@ A budgeting app that helps users keep track of their expenditure. Users can set 
 
 - After 30 minutes of non-use, Heroku server goes to sleep. Waking server with a register request sometimes requires user to log out and in again
 
+- No visual indicator of loading status when requests area being made
+
 - Not yet optimised for mobile
 
 ## Collaborators
