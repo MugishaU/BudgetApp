@@ -134,7 +134,7 @@ export default withRouter(function AddSpend(props) {
               }}
             />
             <Form.Text className="text-muted">
-              Manual Format: "YYYY-MM-DD".
+              Manual Format: YYYY-MM-DD.
             </Form.Text>
           </Form.Group>
 
