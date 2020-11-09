@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { UserContext } from "../../Context/userContext ";
-import { LineChart, PieChart } from "../index/index";
+import { LineChart, PieChart, Statement } from "../index/index";
 import Form from "react-bootstrap/Form";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
@@ -101,6 +101,17 @@ export default function History() {
             <Card>
               <Card.Body>
                 {breakdown && <PieChart breakdown={breakdown} />}
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Card>
+              <Card.Body>
+                {history && date && (
+                  <Statement date={date} spendingHistory={history} />
+                )}
               </Card.Body>
             </Card>
           </Col>
