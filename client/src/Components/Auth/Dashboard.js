@@ -22,19 +22,54 @@ export default function Dashboard() {
       <Container>
         <Row>
           <Col className="colDiv">
-            <ProfileCard profile={profile} history={history} />
-          </Col>
-          <Col className="colDiv">
             <Card>
               <Card.Body>
-                <Card.Title className="graduate text-center">
-                  SPENT MORE THIS MONTH?
-                </Card.Title>
-                <Button className="colDiv" size="lg" to="/spend" as={Link}>
-                  ADD EXPENDITURE
-                </Button>
+                <ProfileCard profile={profile} history={history} />
               </Card.Body>
             </Card>
+          </Col>
+          <Col className="colDiv">
+            <Container>
+              <Row>
+                <Col className="colDiv">
+                  <Card>
+                    <Card.Body>
+                      <Card.Title className="graduate text-center">
+                        SPENT MORE THIS MONTH?
+                      </Card.Title>
+                      <Button
+                        className="colDiv"
+                        size="lg"
+                        to="/spend"
+                        as={Link}
+                      >
+                        ADD EXPENDITURE
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+              <Row>
+                <Col className="colDiv">
+                  <Card>
+                    <Card.Body>
+                      <Card.Title className="graduate text-center">
+                        WANT MORE DETAIL?
+                      </Card.Title>
+                      <Button
+                        className="colDiv"
+                        variant="secondary"
+                        size="lg"
+                        to="/statement"
+                        as={Link}
+                      >
+                        VIEW STATEMENT
+                      </Button>
+                    </Card.Body>
+                  </Card>
+                </Col>
+              </Row>
+            </Container>
           </Col>
         </Row>
 
