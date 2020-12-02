@@ -8,6 +8,7 @@ import {
   SetLimit,
   History,
   Profile,
+  Statement,
 } from "../Components/index/index";
 import Error404 from "../Components/Error404";
 import { UserContext } from "../Context/userContext ";
@@ -39,11 +40,11 @@ export default withRouter(function AuthHomePage(props) {
   let today = new Date();
   let hour = today.getHours();
   useEffect(() => {
-    //problem
+
     if (props.location.pathname == "/register") {
       props.history.push("/");
     }
-    //Problem
+   
     async function fetchData() {
       const options = {
         method: "GET",
@@ -130,6 +131,7 @@ export default withRouter(function AuthHomePage(props) {
             <Route path="/history" component={History} />
             <Route path="/profile" component={Profile} />
             <Route path="/spend" component={AddSpend} />
+            <Route path="/statement" component={Statement} />
             <Route component={Error404} />
           </Switch>
         )}

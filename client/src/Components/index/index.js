@@ -11,3 +11,4 @@ export { default as AddSpend } from "../Auth/AddSpend";
 export { default as SetLimit } from "../Auth/SetLimit";
 export { default as History } from "../Auth/History";
 export { default as Profile } from "../Auth/Profile";
+export { default as Statement } from "../Auth/Statement";
