@@ -40,11 +40,11 @@ export default withRouter(function AuthHomePage(props) {
   let today = new Date();
   let hour = today.getHours();
   useEffect(() => {
-    //problem
+
     if (props.location.pathname == "/register") {
       props.history.push("/");
     }
-    //Problem
+   
     async function fetchData() {
       const options = {
         method: "GET",
