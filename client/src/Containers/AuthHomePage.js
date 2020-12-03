@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import { withRouter } from "react-router";
+import { trackPromise } from 'react-promise-tracker';
 import {
   AuthNavbar,
   Dashboard,
@@ -72,7 +73,7 @@ export default withRouter(function AuthHomePage(props) {
           options
         );
 
-        const breakdownPromise = await breakdownFetch;
+        const breakdownPromise = await trackPromise(breakdownFetch);
         const historyPromise = await historyFetch;
         const profilePromise = await profileFetch;
 

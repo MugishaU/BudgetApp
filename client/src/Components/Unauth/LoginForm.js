@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import * as firebase from "firebase";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { trackPromise } from 'react-promise-tracker';
 
 const login = (email, password) => {
-  firebase
+  trackPromise(firebase
     .auth()
     .signInWithEmailAndPassword(email, password)
-    .catch((error) => alert(error.message));
+    .catch((error) => alert(error.message)));
 };
 
 export default function LoginForm() {
