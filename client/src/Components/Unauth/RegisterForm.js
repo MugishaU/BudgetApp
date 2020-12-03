@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import * as firebase from "firebase";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { trackPromise } from 'react-promise-tracker';
 
 const registerDatabase = (token, username) => {
   const body = { username: username };
@@ -11,12 +12,12 @@ const registerDatabase = (token, username) => {
     body: JSON.stringify(body),
     headers: { "Content-Type": "application/json", token: token },
   };
-  fetch("https://budgt-app.herokuapp.com/register", options)
+  trackPromise(fetch("https://budgt-app.herokuapp.com/register", options)
     .then((r) => r.json())
     .then((data) => alert(data))
     .catch((error) => {
       throw "Database Error";
-    });
+    }));
 };
 
 const registerFirebase = (username, email, password, password2) => {
