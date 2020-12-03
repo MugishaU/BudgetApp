@@ -30,7 +30,7 @@ const LoadingIndicator = props => {
           justifyContent: "center",
           alignItems: "center"
         }}>
-        <Loader type="ThreeDots" color="#2BAD60" height="100" width="100" />
+        <Loader type="ThreeDots" color="#0275d8" height="100" width="100" />
       </div>
     );  
    }
